@@ -1,0 +1,17 @@
+{
+  "name": "canechair.parts",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simon8029/canechair.parts.git"
+  },
+  "author": "Simon X.L.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/simon8029/canechair.parts/issues"
+  },
+  "homepage": "https://github.com/simon8029/canechair.parts#readme"
+}
