@@ -1,17 +1,17 @@
 {
   "name": "canechair.parts",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
-  "scripts": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/simon8029/canechair.parts.git"
-  },
+  "version": "0.1.0",
   "author": "Simon X.L.",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/simon8029/canechair.parts/issues"
+  "private": true,
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.0.17"
   },
-  "homepage": "https://github.com/simon8029/canechair.parts#readme"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
 }
