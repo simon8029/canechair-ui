@@ -4,16 +4,16 @@
   "author": "Simon X.L.",
   "private": true,
   "scripts": {
-    "prestart": "npm run generate:document",
-    "start": "node ccp-npm-scripts/ccp-scripts.start-dev.js",
-    "generate:document": "node ccp-npm-scripts/ccp-scripts.generate-doc.js",
-    "generate:document-watch": "npm run generate:document -- --watch",
-    "build": "node CCBuildScripts/CCBuildScripts.Builder.js",
-    "test": "node CCBuildScripts/CCBuildScripts.Tester.js --env=jsdom"
+    "prestart": "npm run generate:documents",
+    "start": "node CCPScripts/CCPScripts.Development.js",
+    "generate:documents": "node CCPScripts/CCPScripts.GenerateDocuments.js",
+    "generate:documents-watch": "npm run generate:document -- --watch",
+    "build": "node CCBuildScripts/CCBuildScripts.BuildProd.js",
+    "test": "node CCBuildScripts/CCBuildScripts.Test.js --env=jsdom"
   },
   "dependencies": {
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"    
+    "react-dom": "^16.2.0"
   },
   "devDependencies": {
     "autoprefixer": "7.1.6",

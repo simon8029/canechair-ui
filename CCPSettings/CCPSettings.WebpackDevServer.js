@@ -3,8 +3,8 @@
 const errorOverlayMiddleware = require('react-dev-utils/errorOverlayMiddleware');
 const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMiddleware');
 const path = require('path');
-const config = require('./ccp-settings.webpack-dev');
-const paths = require('./ccp-settings.paths');
+const config = require('./CCPSettings.WebpackDev');
+const paths = require('./CCPSettings.Paths');
 
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
 const host = process.env.HOST || '0.0.0.0';

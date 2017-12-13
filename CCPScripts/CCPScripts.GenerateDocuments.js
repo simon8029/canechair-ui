@@ -1,5 +1,4 @@
-const
-  Fs = require('fs');
+const Fs = require('fs');
 Path = require('path');
 Chalk = require('chalk');
 ReactDocgen = require('react-docgen');
@@ -7,9 +6,9 @@ Chokidar = require('chokidar');
 Parse = ReactDocgen.parse;
 
 var paths = {
-  sample: Path.join(__dirname, '../src', 'ccp-documents', 'sample'),
-  components: Path.join(__dirname, '../src', 'ccp-components'),
-  output: Path.join(__dirname, '../ccp-components', 'componentSources.js')
+  sample: Path.join(__dirname, '../src', 'CCPDocuments', 'Sample'),
+  components: Path.join(__dirname, '../src', 'CCPComponents'),
+  output: Path.join(__dirname, '../CCPSettings', 'CCPComponentsResources.js')
 };
 
 const enableWatchMode = process.argv.slice(2) == '--watch';

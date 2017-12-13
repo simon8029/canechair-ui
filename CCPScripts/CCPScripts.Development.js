@@ -12,7 +12,7 @@ process.on('unhandledRejection', err => {
 });
 
 // Ensure environment variables are read.
-require('../ccp-settings/ccp-settings.env');
+require('../CCPSettings/CCPSettings.Enviroment');
 
 const fs = require('fs');
 const chalk = require('chalk');
@@ -27,9 +27,9 @@ const {
   prepareUrls,
 } = require('react-dev-utils/WebpackDevServerUtils');
 const openBrowser = require('react-dev-utils/openBrowser');
-const paths = require('../ccp-settings/ccp-settings.paths');
-const config = require('../ccp-settings/ccp-settings.webpack-dev');
-const createDevServerConfig = require('../ccp-settings/ccp-settings.webpack-dev-server');
+const paths = require('../CCPSettings/CCPSettings.Paths');
+const config = require('../CCPSettings/CCPSettings.WebpackDev');
+const createDevServerConfig = require('../CCPSettings/CCPSettings.WebpackDevServer');
 
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;
