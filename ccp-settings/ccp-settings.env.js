@@ -2,10 +2,10 @@
 
 const fs = require('fs');
 const path = require('path');
-const paths = require('./CCSettings.PathSetting');
+const paths = require('./ccp-settings.env');
 
 // Make sure that including paths.js after env.js will read .env variables.
-delete require.cache[require.resolve('./CCSettings.PathSetting')];
+delete require.cache[require.resolve('./ccp-settings.env')];
 
 const NODE_ENV = process.env.NODE_ENV;
 if (!NODE_ENV) {

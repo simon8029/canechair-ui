@@ -4,7 +4,7 @@
   "author": "Simon X.L.",
   "private": true,
   "scripts": {
-    "start": "node CCBuildScripts/CCBuildScripts.Starter.js",
+    "start": "node ccp-npm-scripts/ccp-scripts.start-dev.js",
     "build": "node CCBuildScripts/CCBuildScripts.Builder.js",
     "test": "node CCBuildScripts/CCBuildScripts.Tester.js --env=jsdom"
   },
