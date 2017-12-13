@@ -35,7 +35,7 @@ function generate(paths) {
 }
 
 function getComponentSoucomponentSources(paths, componentName) {
-  var content = readFile(path.join(paths.components, componentName, componentName + '.js'));
+  var content = readFile(Path.join(paths.components, componentName, componentName + '.js'));
   var info = parse(content);
   return {
     name: componentName,
@@ -49,7 +49,7 @@ function getComponentSoucomponentSources(paths, componentName) {
 function getSample(samplePath, componentName) {
   var sample = getExampleFiles(samplePath, componentName);
   return sample.map(function (file) {
-    var filePath = path.join(samplePath, componentName, file)
+    var filePath = Path.join(samplePath, componentName, file)
     var content = readFile(filePath)
     var info = parse(content);
     return {
@@ -72,19 +72,19 @@ function getExampleFiles(samplePath, componentName) {
 
 function getDirectories(filepath) {
   return Fs.readdirSync(filepath).filter(function (file) {
-    return Fs.statSync(path.join(filepath, file)).isDirectory();
+    return Fs.statSync(Path.join(filepath, file)).isDirectory();
   });
 }
 
 function getFiles(filepath) {
   return Fs.readdirSync(filepath).filter(function (file) {
-    return Fs.statSync(path.join(filepath, file)).isFile();
+    return Fs.statSync(Path.join(filepath, file)).isFile();
   });
 }
 
 function writeFile(filepath, content) {
   Fs.writeFile(filepath, content, function (err) {
-    err ? console.log(Chalk.red(err)) : console.log(Chalk.green("Component data saved."));
+    err ? console.log(Chalk.red(err)) : console.log(Chalk.green("Components resources generated."));
   });
 }
 
