@@ -7,7 +7,7 @@ Chokidar = require('chokidar');
 var paths = {
   SampleFolder: Path.join(__dirname, '../src', 'CCPDocuments', 'Samples'),
   ComponentsFolder: Path.join(__dirname, '../src', 'CCPComponents'),
-  OutputFolder: Path.join(__dirname, '../CCPSettings', 'CCPComponentsResources.js')
+  OutputFolder: Path.join(__dirname, '../CCPSettings', 'CCPComponentsResources.json')
 };
 
 const enableWatchMode = process.argv.slice(2) == '--watch';
@@ -35,7 +35,7 @@ function generateDocuments(folderWithAbsolutePath) {
     }
   });
 
-  writeFile(paths.OutputFolder, "module.exports = " + JSON.stringify(errors.length ? errors : documentMetaData));
+  writeFile(paths.OutputFolder, JSON.stringify(errors.length ? errors : documentMetaData));
 }
 
 function getComponentMetaData(componentFile) {
@@ -44,10 +44,20 @@ function getComponentMetaData(componentFile) {
     let componentMetaData = ReactDocgen.parse(rawContent);
     console.log(componentMetaData);
     return {
-      componentName: 
+      componentName: componentFile,
+      componentFilePath: componentFile,
+      metadata: {
+        description: componentMetaData.description,
+        props: componentMetaData.props,
+        code: rawContent
+      }
     }
-  } catch{
-
+  } catch (error) {
+    return {
+      componentName: componentFile,
+      componentFilePath: componentFile,
+      error: error
+    }
   }
 };
 
