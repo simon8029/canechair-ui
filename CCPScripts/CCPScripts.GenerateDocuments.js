@@ -3,7 +3,6 @@ Path = require('path');
 Chalk = require('chalk');
 ReactDocgen = require('react-docgen');
 Chokidar = require('chokidar');
-Parse = ReactDocgen.parse;
 
 var paths = {
   SampleFolder: Path.join(__dirname, '../src', 'CCPDocuments', 'Samples'),
@@ -13,20 +12,55 @@ var paths = {
 
 const enableWatchMode = process.argv.slice(2) == '--watch';
 if (enableWatchMode) {
-  // Regenerate component metadata when ComponentsFolder or sample change.
+  // Regenerate component metadata when Components or samples change.
   Chokidar.watch([paths.SampleFolder, paths.ComponentsFolder]).on('change', function (event, path) {
-    generateComponentMetaData(paths.ComponentsFolder);
+    generateDocuments(paths.ComponentsFolder);
   });
 } else {
   // Generate component metadata
-  // generateComponentMetaData(paths.ComponentsFolder);
-  var allComponentFiles = [];
+  generateDocuments(paths.ComponentsFolder);
+
+}
+
+function generateDocuments(folderWithAbsolutePath) {
+  let errors = [];
+  let allComponentFiles = [];
   allComponentFiles = getAllComponentFilesWithAbsolutePath(paths.ComponentsFolder, allComponentFiles);
-  allComponentFiles = removeFilesWithGivenCharacters(allComponentFiles, ['index.js', 'spec.js']);
-  allComponentFiles.map(f => {
-    console.log(Chalk.green(f));
-    // console.log(f.indexOf('index.js') === -1);
-  })
+
+  let documentMetaData = allComponentFiles.map(componentFile => {
+    try {
+      return getComponentMetaData(componentFile);
+    } catch (error) {
+      errors.push(`Error occured while get component meta data for ${componentFile} => ${error}`);
+    }
+  });
+
+  writeFile(paths.OutputFolder, "module.exports = " + JSON.stringify(errors.length ? errors : documentMetaData));
+}
+
+function getComponentMetaData(componentFile) {
+  try {
+    let rawContent = readFile(componentFile);
+    let componentMetaData = ReactDocgen.parse(rawContent);
+    console.log(componentMetaData);
+    return {
+      componentName: 
+    }
+  } catch{
+
+  }
+};
+
+function populateComponentModel(paths, componentName) {
+  var content = readFile(Path.join(paths.ComponentsFolder, componentName, componentName + '.js'));
+  var info = parse(content);
+  return {
+    name: componentName,
+    description: info.description,
+    props: info.props,
+    code: content,
+    SampleFolder: getSamples(paths.SampleFolder, componentName)
+  }
 }
 
 function removeFilesWithGivenCharacters(fileArray, charactersArray) {
@@ -45,49 +79,21 @@ function removeFilesWithGivenCharacters(fileArray, charactersArray) {
 };
 
 function getAllComponentFilesWithAbsolutePath(folderWithAbsolutePath, componentFiles) {
-  var files = getFilesWithAbsolutePath(folderWithAbsolutePath).map((file) => {
+  var files = getDirectChildFilesWithAbsolutePathByGivenFolderPath(folderWithAbsolutePath).map((file) => {
     componentFiles.push(file);
   });
 
-  getSubFolderWithAbsolutePath(folderWithAbsolutePath).map(function (subFolder) {
+  getDirectChildSubFoldersWithAbsolutePathByGivenFolderPath(folderWithAbsolutePath).map(function (subFolder) {
     getAllComponentFilesWithAbsolutePath(subFolder, componentFiles
     );
   });
+  componentFiles = removeFilesWithGivenCharacters(componentFiles, ['index.js', 'spec.js']);
   return componentFiles;
 };
 
-function generateComponentMetaData(folderWithAbsolutePath) {
-  var errors = [];
-  let componentFiles = [];
-  var componentSources = getSubFolderWithAbsolutePath(folderWithAbsolutePath).map(function (item) {
-    try {
-      var files = getFilesWithAbsolutePath(`${folderWithAbsolutePath}\\${item}`).map((file) => {
-        componentFiles.push(`${folderWithAbsolutePath}\\${item}\\${file}`);
-      });
-      var subFolders = getSubFolderWithAbsolutePath(item).map((folderWithAbsolutePath) => {
 
-      });
 
-      // generateComponentMetaData(folderWithAbsolutePath);
 
-    } catch (error) {
-      errors.push('Error: ' + item + '=>' + error);
-    }
-  });
-  // writeFile(paths.OutputFolder, "module.exports = " + JSON.stringify(errors.length ? errors : componentSources));
-}
-
-function populateComponentModel(paths, componentName) {
-  var content = readFile(Path.join(paths.ComponentsFolder, componentName, componentName + '.js'));
-  var info = parse(content);
-  return {
-    name: componentName,
-    description: info.description,
-    props: info.props,
-    code: content,
-    SampleFolder: getSamples(paths.SampleFolder, componentName)
-  }
-}
 
 function getSamples(samplePath, componentName) {
   var sample = getSampleFiles(samplePath, componentName);
@@ -106,14 +112,14 @@ function getSamples(samplePath, componentName) {
 function getSampleFiles(samplePath, componentName) {
   var exampleFiles = [];
   try {
-    exampleFiles = getFilesWithAbsolutePath(path.join(samplePath, componentName));
+    exampleFiles = getDirectChildFilesWithAbsolutePathByGivenFolderPath(path.join(samplePath, componentName));
   } catch (error) {
   }
   return exampleFiles;
 }
 
 // Given folderpath, return all subfolder's absolute path
-function getSubFolderWithAbsolutePath(folderPath) {
+function getDirectChildSubFoldersWithAbsolutePathByGivenFolderPath(folderPath) {
   var folderNames = Fs.readdirSync(folderPath).filter(function (item) {
     return Fs.statSync(Path.join(folderPath, item)).isDirectory();
   });
@@ -123,7 +129,7 @@ function getSubFolderWithAbsolutePath(folderPath) {
   })
 }
 
-function getFilesWithAbsolutePath(folderPath) {
+function getDirectChildFilesWithAbsolutePathByGivenFolderPath(folderPath) {
   var fileNames = Fs.readdirSync(folderPath).filter(function (item) {
     return Fs.statSync(Path.join(folderPath, item)).isFile();
   });
