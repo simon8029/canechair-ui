@@ -7,7 +7,7 @@ Chokidar = require('chokidar');
 var paths = {
   SampleFolder: Path.join(__dirname, '../src', 'CCPDocuments', 'Samples'),
   ComponentsFolder: Path.join(__dirname, '../src', 'CCPComponents'),
-  OutputFolder: Path.join(__dirname, '../CCPSettings', 'CCPComponentsResources.json')
+  OutputFolder: Path.join(__dirname, '../CCPSettings', 'CCPComponentsMetaData.json')
 };
 
 const enableWatchMode = process.argv.slice(2) == '--watch';
@@ -28,11 +28,7 @@ function generateDocuments(folderWithAbsolutePath) {
   allComponentFiles = getAllComponentFilesWithAbsolutePath(paths.ComponentsFolder, allComponentFiles);
 
   let documentMetaData = allComponentFiles.map(componentFile => {
-    try {
-      return getComponentMetaData(componentFile);
-    } catch (error) {
-      errors.push(`Error occured while get component meta data for ${componentFile} => ${error}`);
-    }
+    return getComponentMetaData(componentFile);
   });
 
   writeFile(paths.OutputFolder, JSON.stringify(errors.length ? errors : documentMetaData));
@@ -42,9 +38,10 @@ function getComponentMetaData(componentFile) {
   try {
     let rawContent = readFile(componentFile);
     let componentMetaData = ReactDocgen.parse(rawContent);
+    console.log(Chalk.green('component mete data: '));
     console.log(componentMetaData);
     return {
-      componentName: componentFile,
+      componentName: getFileName(componentFile),
       componentFilePath: componentFile,
       metadata: {
         description: componentMetaData.description,
@@ -53,10 +50,11 @@ function getComponentMetaData(componentFile) {
       }
     }
   } catch (error) {
+    console.log(Chalk.red(error));
     return {
-      componentName: componentFile,
+      componentName: getFileName(componentFile),
       componentFilePath: componentFile,
-      error: error
+      errors: error.toString()
     }
   }
 };
@@ -101,7 +99,9 @@ function getAllComponentFilesWithAbsolutePath(folderWithAbsolutePath, componentF
   return componentFiles;
 };
 
-
+function getFileName(path) {
+  return path.split("\\").slice(-1)[0].split('.')[0];
+};
 
 
 
