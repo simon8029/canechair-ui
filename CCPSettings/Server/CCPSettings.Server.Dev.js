@@ -8,6 +8,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 const Express = require('express');
 import Path from 'path';
 import Open from 'open';
+import colors from 'colors';
 
 /* eslint-disable no-console */
 const
@@ -28,4 +29,4 @@ App.listen(Port, (err) => {
 
 module.exports = App;
 
-console.log(`[dev-mode] Server running at http://localhost:${Port}`);
+console.log(`[dev-mode] Server running at http://localhost:${Port}`.green);

@@ -4,7 +4,7 @@
   "author": "Simon X.L.",
   "scripts": {
     "prestart": "npm run generate:documents",
-    "start": "npm-run-all --parallel start:dev generate:documents-watch",
+    "start": "npm-run-all --parallel security-check start:dev generate:documents-watch",
     "start:dev": "babel-node CCPSettings/Server/CCPSettings.Server.Dev.js",
     "security-check": "nsp check",
     "generate:documents": "node CCPScripts/CCPScripts.GenerateDocuments.js",
