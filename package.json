@@ -7,10 +7,10 @@
     "start": "npm-run-all --parallel security-check start:dev generate:documents-watch",
     "start:dev": "babel-node CCPSettings/Server/CCPSettings.Server.Dev.js",
     "security-check": "nsp check",
-    "generate:documents": "node CCPScripts/CCPScripts.GenerateDocuments.js",
+    "generate:documents": "babel-node CCPScripts/CCPScripts.GenerateDocuments.js",
     "generate:documents-watch": "npm run generate:documents -- --watch",
-    "build": "node CCBuildScripts/CCBuildScripts.BuildProd.js",
-    "test": "node CCBuildScripts/CCBuildScripts.Test.js --env=jsdom"
+    "build": "babel-node CCBuildScripts/CCBuildScripts.BuildProd.js",
+    "test": "babel-node CCBuildScripts/CCBuildScripts.Test.js --env=jsdom"
   },
   "keywords": [
     "components",

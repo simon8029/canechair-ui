@@ -1,7 +1,7 @@
 import React from 'react';
-import navigation from './Navigation.js';
+import Navigation from './Navigation.js';
 import ComponentPage from './ComponentPage';
-import CCPComponentMetaData from '../../CCPSettings/CCPComponentsMetaData.json';
+import CCPComponentMetaData from '../../CCPSettings/CCPComponentsMetaData.js';
 
 class DocumentPage extends React.Component {
   constructor(props) {
@@ -22,8 +22,10 @@ class DocumentPage extends React.Component {
     const component = route ? CCPComponentMetaData.filter(c => c.name === route)[0] : CCPComponentMetaData[0];
     return (
       <div id="" className="">
-        <Navigation components={CCPComponentMetaData.map((component) => component.name)} />
+        <Navigation components={CCPComponentMetaData.map((component) => component.componentName)} />
+        <ComponentPage component={component} />
       </div>
+
     )
   }
 }

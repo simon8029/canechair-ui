@@ -1,19 +1,18 @@
 const Fs = require('fs');
-Path = require('path');
-Chalk = require('chalk');
-ReactDocgen = require('react-docgen');
-Chokidar = require('chokidar');
+const Path = require('path');
+const Chalk = require('chalk');
+const ReactDocgen = require('react-docgen');
+const Chokidar = require('chokidar');
 
-var paths = {
-  SampleFolder: Path.join(__dirname, '../src', 'CCPDocuments', 'Samples'),
+let paths = {
   ComponentsFolder: Path.join(__dirname, '../src', 'CCPComponents'),
-  OutputFolder: Path.join(__dirname, '../CCPSettings', 'CCPComponentsMetaData.json')
+  OutputFolder: Path.join(__dirname, '../CCPSettings', 'CCPComponentsMetaData.js')
 };
 
 const enableWatchMode = process.argv.slice(2) == '--watch';
 if (enableWatchMode) {
   // Regenerate component metadata when Components or samples change.
-  Chokidar.watch([paths.SampleFolder, paths.ComponentsFolder]).on('change', function (event, path) {
+  Chokidar.watch([paths.ComponentsFolder]).on('change', function (event, path) {
     generateDocuments(paths.ComponentsFolder);
   });
 } else {
@@ -31,22 +30,21 @@ function generateDocuments(folderWithAbsolutePath) {
     return getComponentMetaData(componentFile);
   });
 
-  writeFile(paths.OutputFolder, JSON.stringify(errors.length ? errors : documentMetaData));
+  writeFile(paths.OutputFolder, "module.exports = " + JSON.stringify(errors.length ? errors : documentMetaData));
 }
 
 function getComponentMetaData(componentFile) {
   try {
-    let rawContent = readFile(componentFile);
-    let componentMetaData = ReactDocgen.parse(rawContent);
-    console.log(Chalk.green('component mete data: '));
-    console.log(componentMetaData);
+    let rawContent = ReactDocgen.parse(readFile(componentFile));
+
     return {
-      componentName: getFileName(componentFile),
-      componentFilePath: componentFile,
-      metadata: {
-        description: componentMetaData.description,
-        props: componentMetaData.props,
-        code: rawContent
+      ComponentName: getFileName(componentFile),
+      ComponentFilePath: componentFile,
+      ComponentMetadata: {
+        ComponentDescription: rawContent.description,
+        ComponentProps: rawContent.props,
+        ComponentCode: rawContent,
+        ComponentSamples: getSamples(componentFile)
       }
     }
   } catch (error) {
@@ -59,21 +57,21 @@ function getComponentMetaData(componentFile) {
   }
 };
 
-function populateComponentModel(paths, componentName) {
-  var content = readFile(Path.join(paths.ComponentsFolder, componentName, componentName + '.js'));
-  var info = parse(content);
-  return {
-    name: componentName,
-    description: info.description,
-    props: info.props,
-    code: content,
-    SampleFolder: getSamples(paths.SampleFolder, componentName)
-  }
-}
+// function populateComponentModel(paths, componentName) {
+//   let content = readFile(Path.join(paths.ComponentsFolder, componentName, componentName + '.js'));
+//   let info = parse(content);
+//   return {
+//     name: componentName,
+//     description: info.description,
+//     props: info.props,
+//     code: content,
+//     SampleFolder: getSamples(paths.SampleFolder, componentName)
+//   }
+// }
 
 function removeFilesWithGivenCharacters(fileArray, charactersArray) {
-  reduced = fileArray.reduce(function (filteredFileArray, file) {
-    var includeGivenKeywords = charactersArray.map(c => {
+  let reduced = fileArray.reduce(function (filteredFileArray, file) {
+    let includeGivenKeywords = charactersArray.map(c => {
       return file.indexOf(c) !== -1;
     }).includes(true);
 
@@ -87,7 +85,7 @@ function removeFilesWithGivenCharacters(fileArray, charactersArray) {
 };
 
 function getAllComponentFilesWithAbsolutePath(folderWithAbsolutePath, componentFiles) {
-  var files = getDirectChildFilesWithAbsolutePathByGivenFolderPath(folderWithAbsolutePath).map((file) => {
+  let files = getDirectChildFilesWithAbsolutePathByGivenFolderPath(folderWithAbsolutePath).map((file) => {
     componentFiles.push(file);
   });
 
@@ -103,34 +101,40 @@ function getFileName(path) {
   return path.split("\\").slice(-1)[0].split('.')[0];
 };
 
-
-
-function getSamples(samplePath, componentName) {
-  var sample = getSampleFiles(samplePath, componentName);
-  return sample.map(function (file) {
-    var filePath = Path.join(samplePath, componentName, file)
-    var content = readFile(filePath)
-    var info = parse(content);
-    return {
-      name: file.slice(0, -3),
-      description: info.description,
-      code: content
-    };
-  });
+function getSamples(componentFile) {
+  let sampleFiles = getSampleFiles(componentFile);
+  console.log(`sampleFiles:`);
+  console.log(sampleFiles);
+  if (sampleFiles.length > 0) {
+    return sampleFiles.map(function (sampleFile) {
+      let content = readFile(sampleFile)
+      let info = parse(content);
+      return {
+        SampleName: sampleFile.slice(0, -3),
+        SampleDescription: info.description,
+        SampleCode: content
+      };
+    });
+  } else {
+    return [];
+  }
 }
 
-function getSampleFiles(samplePath, componentName) {
-  var exampleFiles = [];
+function getSampleFiles(componentFile) {
+  let exampleFiles = [];
   try {
-    exampleFiles = getDirectChildFilesWithAbsolutePathByGivenFolderPath(path.join(samplePath, componentName));
+    let componentFileFolder = Path.dirname(componentFile);
+    exampleFiles = Fs.readdirSync(`${componentFileFolder}/samples`);
   } catch (error) {
+    console.log(`Error happens when get samples: ${error}`);
+    return exampleFiles;
   }
   return exampleFiles;
 }
 
 // Given folderpath, return all subfolder's absolute path
 function getDirectChildSubFoldersWithAbsolutePathByGivenFolderPath(folderPath) {
-  var folderNames = Fs.readdirSync(folderPath).filter(function (item) {
+  let folderNames = Fs.readdirSync(folderPath).filter(function (item) {
     return Fs.statSync(Path.join(folderPath, item)).isDirectory();
   });
 
@@ -140,7 +144,7 @@ function getDirectChildSubFoldersWithAbsolutePathByGivenFolderPath(folderPath) {
 }
 
 function getDirectChildFilesWithAbsolutePathByGivenFolderPath(folderPath) {
-  var fileNames = Fs.readdirSync(folderPath).filter(function (item) {
+  let fileNames = Fs.readdirSync(folderPath).filter(function (item) {
     return Fs.statSync(Path.join(folderPath, item)).isFile();
   });
 
