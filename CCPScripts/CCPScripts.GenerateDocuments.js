@@ -50,9 +50,9 @@ function getComponentMetaData(componentFile) {
   } catch (error) {
     console.log(Chalk.red(error));
     return {
-      componentName: getFileName(componentFile),
-      componentFilePath: componentFile,
-      errors: error.toString()
+      ComponentName: getFileName(componentFile),
+      ComponentFilePath: componentFile,
+      Errors: error.toString()
     }
   }
 };
