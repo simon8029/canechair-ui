@@ -6,7 +6,7 @@
     "prestart": "npm run generate:documents",
     "start:backup": "npm-run-all --parallel security-check start:dev generate:documents-watch",
     "build": "webpack --config ./CCPSettings/webpack.config.prod.js",
-    "start:dev": "webpack-dev-server --config ./CCPSettings/webpack.config.dev.js",
+    "start:dev": "webpack-dashboard -- webpack-dev-server --config ./CCPSettings/webpack.config.dev.js",
     "security-check": "nsp check",
     "generate:documents": "babel-node CCPScripts/CCPScripts.GenerateDocuments.js",
     "generate:documents-watch": "npm run generate:documents -- --watch",
@@ -45,6 +45,7 @@
     "react-hot-loader": "^3.1.3",
     "style-loader": "^0.19.1",
     "webpack": "3.8.1",
+    "webpack-dashboard": "^1.0.2",
     "webpack-dev-middleware": "^2.0.2",
     "webpack-dev-server": "^2.9.7"
   }
