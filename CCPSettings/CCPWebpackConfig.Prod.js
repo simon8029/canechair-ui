@@ -4,7 +4,7 @@ const WebpackConfigHelper = require('./CCPWebpackConfig.Helper');
 const WebpackMerge = require('webpack-merge');
 
 const ProductionConfig = WebpackMerge([
-  WebpackConfigHelper.extractCSS({ use: "css-loader" })
+  WebpackConfigHelper.extractCSS({ use: ["css-loader", WebpackConfigHelper.autoprefix()] })
 ]);
 
 module.exports = WebpackMerge(CommonConfig, ProductionConfig);
