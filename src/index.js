@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import "purecss";
 import './main.css';
 
 // import DocumentPage from './CCPDocuments/DocumentPage';

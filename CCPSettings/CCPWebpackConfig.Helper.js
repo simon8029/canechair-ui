@@ -1,7 +1,7 @@
 // const Path = require('path');
 // const Webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const PurifyCSSPlugin = require('purifycss-webpack');
+const PurifyCSSPlugin = require('purifycss-webpack');
 // const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const GitRevisionPlugin = require('git-revision-webpack-plugin');
 // const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
@@ -75,9 +75,9 @@ exports.autoprefix = () => ({
   }
 })
 
-// exports.purifyCSS = ({ paths }) => ({
-//   plugins: [new PurifyCSSPlugin({ paths })]
-// });
+exports.purifyCSS = ({ paths }) => ({
+  plugins: [new PurifyCSSPlugin({ paths })]
+});
 
 // exports.loadImages = ({ include, exclude, options } = {}) => ({
 //   module: {

@@ -4,17 +4,17 @@ const WebpackConfigHelper = require('./CCPWebpackConfig.Helper');
 const WebpackMerge = require('webpack-merge');
 
 const Paths = {
-  app: path.join(process.cwd(), "src"),
-  build: path.join(process.cwd(), "dist"),
+  src: path.join(process.cwd(), "src"),
+  dist: path.join(process.cwd(), "dist"),
 };
 
-module.exports = WebpackMerge([
+const Settings = WebpackMerge([
   {
     entry: {
-      canechairparts: Paths.app,
+      canechairparts: Paths.src,
     },
     output: {
-      path: Paths.build,
+      path: Paths.dist,
       filename: "[name].js",
     },
     plugins: [
@@ -24,3 +24,8 @@ module.exports = WebpackMerge([
     ]
   }
 ]);
+
+module.exports = {
+  Settings,
+  Paths
+};
