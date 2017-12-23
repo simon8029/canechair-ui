@@ -1,4 +1,5 @@
 const CommonConfig = require('./CCPWebpackConfig.Common');
+const WebpackConfigHelper = require('./CCPWebpackConfig.Helper');
 const WebpackMerge = require('webpack-merge');
 
 const DevelopmentConfig = WebpackMerge([
@@ -12,7 +13,9 @@ const DevelopmentConfig = WebpackMerge([
         warnings: true
       }
     }
-  }
+  },
+  WebpackConfigHelper.loadCSS(),
+
 ]);
 
 module.exports = WebpackMerge(CommonConfig, DevelopmentConfig);

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import './index.css';
+import './main.css';
+
 // import DocumentPage from './CCPDocuments/DocumentPage';
 // import registerServiceWorker from './registerServiceWorker';
 
