@@ -6,7 +6,8 @@ const glob = require('glob');
 
 const ProductionConfig = WebpackMerge([
   WebpackConfigHelper.extractCSS({ use: ["css-loader", WebpackConfigHelper.autoprefix()] }),
-  WebpackConfigHelper.purifyCSS({ paths: glob.sync(`${CommonConfig.Paths.src}/**/*.js`, { nodir: true }) })
+  WebpackConfigHelper.purifyCSS({ paths: glob.sync(`${CommonConfig.Paths.src}/**/*.js`, { nodir: true }) }),
+  WebpackConfigHelper.loadImages({ options: { limit: 15000, name: "[name].[ext]" } })
 ]);
 
 module.exports = WebpackMerge(CommonConfig.Settings, ProductionConfig);

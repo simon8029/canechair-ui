@@ -15,7 +15,8 @@ const DevelopmentConfig = WebpackMerge([
     }
   },
   WebpackConfigHelper.loadCSS(),
+  WebpackConfigHelper.loadImages()
 
 ]);
 
-module.exports = WebpackMerge(CommonConfig, DevelopmentConfig);
+module.exports = WebpackMerge(CommonConfig.Settings, DevelopmentConfig);
