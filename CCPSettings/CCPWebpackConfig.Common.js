@@ -22,7 +22,8 @@ const Settings = WebpackMerge([
         title: "CaneChair.Parts",
       }),
     ]
-  }
+  },
+  WebpackConfigHelper.transformJavaScript({ include: Paths.src })
 ]);
 
 module.exports = {
