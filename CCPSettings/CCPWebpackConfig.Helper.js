@@ -95,9 +95,9 @@ exports.transformJavaScript = ({ include, exclude } = {}) => ({
   }
 });
 
-// exports.generateSourceMaps = ({ type }) => ({
-//   devtool: type
-// });
+exports.generateSourceMaps = ({ type }) => ({
+  devtool: type
+});
 
 // exports.extractBundles = bundles => ({
 //   plugins: bundles.map(

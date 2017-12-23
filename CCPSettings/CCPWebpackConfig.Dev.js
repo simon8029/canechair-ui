@@ -15,7 +15,9 @@ const DevelopmentConfig = WebpackMerge([
     }
   },
   WebpackConfigHelper.loadCSS(),
-  WebpackConfigHelper.loadImages()
+  WebpackConfigHelper.loadImages(),
+  WebpackConfigHelper.generateSourceMaps({ type: "cheap-module-eval-source-map" }),
+  { output: { devtoolModulefilenametemplate: "webpack:///[absolute-resource-path]" } }
 
 ]);
 
