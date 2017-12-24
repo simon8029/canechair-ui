@@ -131,14 +131,14 @@ exports.minifyCSS = ({ options }) => ({
   ]
 })
 
-// exports.setFreeVariable = (key, value) => {
-//   const env = {};
-//   env[key] = JSON.stringify(value);
+exports.setFreeVariable = (key, value) => {
+  const env = {};
+  env[key] = JSON.stringify(value);
 
-//   return {
-//     plugins: [new Webpack.DefinePlugin(env)]
-//   }
-// }
+  return {
+    plugins: [new Webpack.DefinePlugin(env)]
+  }
+}
 
 // // export function loadCSS(include, exclude) {
 // //   return `module: {

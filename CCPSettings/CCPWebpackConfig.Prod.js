@@ -20,7 +20,8 @@ const ProductionConfig = WebpackMerge([
   WebpackConfigHelper.clean(CommonConfig.Paths.dist),
   WebpackConfigHelper.attachRevision(),
   WebpackConfigHelper.uglifyJavaScript(),
-  WebpackConfigHelper.minifyCSS({ options: { discardComments: { removeAll: true }, safe: true } })
+  WebpackConfigHelper.minifyCSS({ options: { discardComments: { removeAll: true }, safe: true } }),
+  WebpackConfigHelper.setFreeVariable("process.env.NODE_ENV", "production")
 ]);
 
 module.exports = WebpackMerge(CommonConfig.Settings, ProductionConfig);
