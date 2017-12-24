@@ -22,7 +22,7 @@ function CCP_TextField({ textFieldId, textFieldType = "text", textFieldName, tex
   );
 };
 
-TextInput.propTypes = {
+CCP_TextField.propTypes = {
   /** The textfields's id. */
   textFieldId: PropTypes.string.isRequired,
 
