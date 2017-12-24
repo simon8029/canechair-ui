@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import "purecss";
-import './main.css';
+import { createStore, compose } from 'redux';
+import rootReducer from './CCPReducers';
+import * as CCPActions from './CCPActions';
+import CCPStore from './CCPStore';
+import App from './App';
+import InitialState from './CCPReducers/CCPInitialState';
+// import "purecss";
 
-// import DocumentPage from './CCPDocuments/DocumentPage';
-// import registerServiceWorker from './registerServiceWorker';
 
-// ReactDOM.render(<DocumentPage />, document.getElementById('root'));
-// registerServiceWorker();
-import component from "./testComponent";
-
-document.body.appendChild(component());
+const store = CCPStore(InitialState);
+ReactDOM.render(
+  <App store={store} />,
+  document.getElementById('root')
+);

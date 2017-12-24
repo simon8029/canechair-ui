@@ -16,6 +16,7 @@ const ProductionConfig = WebpackMerge([
       filename: "[name].[chunkhash:8].js",
     },
   },
+  WebpackConfigHelper.setFreeVariable("process.env.NODE_ENV", "production"),
   WebpackConfigHelper.extractCSS({ use: ["css-loader", WebpackConfigHelper.autoprefix()] }),
   WebpackConfigHelper.purifyCSS({ paths: glob.sync(`${CommonConfig.Paths.src}/**/*.js`, { nodir: true }) }),
   WebpackConfigHelper.loadImages({ options: { limit: 15000, name: "[name].[ext]" } }),
@@ -24,8 +25,7 @@ const ProductionConfig = WebpackMerge([
   WebpackConfigHelper.clean(CommonConfig.Paths.dist),
   WebpackConfigHelper.attachRevision(),
   WebpackConfigHelper.uglifyJavaScript(),
-  WebpackConfigHelper.minifyCSS({ options: { discardComments: { removeAll: true }, safe: true } }),
-  WebpackConfigHelper.setFreeVariable("process.env.NODE_ENV", "production")
+  WebpackConfigHelper.minifyCSS({ options: { discardComments: { removeAll: true }, safe: true } })
 ]);
 
 module.exports = WebpackMerge(CommonConfig.Settings, ProductionConfig);

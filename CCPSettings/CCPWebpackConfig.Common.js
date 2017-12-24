@@ -20,10 +20,14 @@ const Settings = WebpackMerge([
     },
     plugins: [
       new HtmlWebpackPlugin({
-        title: "CaneChair.Parts",
+        template: './src/index.template.ejs',
+        inject: 'body',
       }),
       new Webpack.NamedModulesPlugin()
-    ]
+    ],
+    node: {
+      fs: "empty"
+    }
   },
   WebpackConfigHelper.transformJavaScript({ include: Paths.src })
 ]);

@@ -6,7 +6,7 @@ const Chokidar = require('chokidar');
 
 let paths = {
   ComponentsFolder: Path.join(__dirname, '../src', 'CCPComponents'),
-  OutputFolder: Path.join(__dirname, '../CCPSettings', 'CCPComponentsMetaData.js')
+  OutputFolder: Path.join(__dirname, '../CCPSettings', 'CCPComponentsMetaData.json')
 };
 
 const enableWatchMode = process.argv.slice(2) == '--watch';
@@ -30,7 +30,7 @@ function generateDocuments(folderWithAbsolutePath) {
     return getComponentMetaData(componentFile);
   });
 
-  writeFile(paths.OutputFolder, "module.exports = " + JSON.stringify(errors.length ? errors : documentMetaData));
+  writeFile(paths.OutputFolder, JSON.stringify(errors.length ? errors : documentMetaData));
 }
 
 function getComponentMetaData(componentFile) {

@@ -8,31 +8,6 @@ const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const cssnano = require('cssnano');
 
-// exports.devServer = ({ host, port } = {}) => ({
-//   devServer: {
-//     stats: "errors-only",// Display errors only 
-//     host,
-//     port,
-//     overlay: {
-//       errors: true,
-//       warnings: true
-//     },
-//     watchOptions: {
-//       aggregateTimeout: 300, // Delay the rebuild after the first change
-//       poll: 1000 // poll using interval in ms (accepts boolean)
-//     },
-//   },
-//   plugins: [
-//     new Webpack.WatchIgnorePlugin([
-//       Path.join(__dirname, "node_modules") // Ignore node_modules so CPU usage with poll watching drops significantly.
-//     ]),
-//     new Webpack.LoaderOptionsPlugin({
-//       debug: true,
-//       noInfo: false
-//     })
-//   ]
-// });
-
 exports.loadCSS = ({ include, exclude } = {}) => ({
   module: {
     rules: [
@@ -139,11 +114,3 @@ exports.setFreeVariable = (key, value) => {
     plugins: [new Webpack.DefinePlugin(env)]
   }
 }
-
-// // export function loadCSS(include, exclude) {
-// //   return `module: {
-// //     rules: [
-// //       { test: /.\css$/, include, exclude, use: ["style-loader", "css-loader"] }
-// //     ]
-// //   });`;
-// // }

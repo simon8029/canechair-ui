@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+export default SampleComponent;
 
-class Sample extends React.Component {
+class SampleComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showCode: false };
+    this.state = { sampleDisplayStatus: false };
   }
 
-  toggleCode(event) {
+  toggleSampleDisplayStatus(event) {
     event.preventDefault();
     this.setState(prevState => {
-      return { showCode: !prevState.showCode };
+      return { sampleDisplayStatus: !prevState.sampleDisplayStatus };
     });
   }
 
   render() {
-    const { showCode } = this.state;
+    const { sampleDisplayStatus } = this.state;
     const { code, description, name } = this.props.Sample;
     // Must use CommonJS require to dynamically require because ES Modules must be statically analyzable.
     // const SampleComponent = require(`./Samples/${this.props.componentName}/${name}`).default;
@@ -26,12 +27,12 @@ class Sample extends React.Component {
         <SampleComponent />
 
         <p>
-          <a href="#" onClick={this.toggleCode}>
-            {showCode ? "Hide" : "Show"} Code
+          <a href="#" onClick={this.toggleSampleDisplayStatus}>
+            {sampleDisplayStatus ? "Hide" : "Show"} Code
           </a>
         </p>
 
-        {showCode && <CodeSample>{code}</CodeSample>} */}
+        {sampleDisplayStatus && <CodeSample>{code}</CodeSample>} */}
       </div>
     )
   }
@@ -42,4 +43,3 @@ Sample.propTypes = {
   componentName: PropTypes.string.isRequired
 }
 
-export default Sample;

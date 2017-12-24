@@ -1,79 +1,40 @@
-// import React from 'react';
-// import Navigation from './Navigation.js';
-// import ComponentPage from './ComponentPage';
-// import CCPComponentMetaData from '../../CCPSettings/CCPComponentsMetaData.js';
-
-// class DocumentPage extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       components: getComponents(),
-//       route: window.location.hash.substr(1)
-//     }
-//   }
-
-//   componentDidMount() {
-//     window.addEventListener('hashchange', () => {
-//       this.setState({ route: window.location.hash.substr(1) });
-//     })
-//   }
-
-
-
-//   render() {
-//     const { route } = this.state;
-//     const component = route ? CCPComponentMetaData.filter(c => c.name === route)[0] : CCPComponentMetaData[0];
-
-//     debugger;
-//     return (
-//       <div id="" className="">
-//         <Navigation components={components} />
-//         <ComponentPage component={component} />
-//       </div>
-
-//     )
-//   }
-// }
-
-// function getComponents() {
-//   let components = JSON.parse(CCPComponentMetaData);
-//   debugger;
-//   return components;
-// }
-
-// export default DocumentPage;
-
-
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as DocumentPageActions from '__filePathOfActions__';
+import Navigation from './Navigation';
 class DocumentPage extends React.Component {
   constructor(props, context) {
     super(props, context);
+    this.state = props;
+    console.log(`this.state:`);
+    console.log(this.state);
   }
 
   render() {
     return (
-      <div>
+      <div id="" className="">
+        <Navigation Components={this.state.Components} />
+        {/* <ComponentPage component={component} /> */}
       </div>
     );
   }
 }
-DocumentPage.propTypes = {
-  actions: PropTypes.object.isRequired
-};
+// DocumentPage.propTypes = {
+//   actions: PropTypes.object.isRequired
+// };
 
 function mapStateToProps(state, ownProps) {
+  console.log(`state in document page:`);
+  console.log(state);
   return {
-    state: state
+    Components: state.Components
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(DocumentPageActions, dispatch)
-  };
-}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     actions: bindActionCreators(DocumentPageActions, dispatch)
+//   };
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DocumentPage);
+export default connect(mapStateToProps)(DocumentPage);

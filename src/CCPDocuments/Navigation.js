@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Navigation = ({ components }) => {
-  debugger;
+const Navigation = ({ Components }) => {
+  // debugger;
   return (
     <div>
       <ul className="navigation">
         {
-          components.map((name) => {
+          Components.map((component) => {
             return (
-              <li key={name}>
-                <a href={`#${name}`}>{name}</a>
+              <li key={component.ComponentName}>
+                <a href={`#${component.ComponentName}`}>{component.ComponentName}</a>
               </li>
             )
           }
@@ -22,7 +22,7 @@ const Navigation = ({ components }) => {
 };
 
 Navigation.propTypes = {
-  components: PropTypes.array.isRequired
+  Components: PropTypes.array.isRequired
 };
 
 export default Navigation;

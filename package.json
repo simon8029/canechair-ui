@@ -4,7 +4,7 @@
   "author": "Simon X.L.",
   "scripts": {
     "prestart": "npm run generate:documents",
-    "start:backup": "npm-run-all --parallel security-check start:dev generate:documents-watch",
+    "start": "npm-run-all --parallel security-check start:dev generate:documents-watch",
     "build": "webpack --config ./CCPSettings/CCPWebpackConfig.Prod.js",
     "build:stats": "webpack --config ./CCPSettings/CCPWebpackConfig.Prod.js --json > stats.json",
     "start:dev": "nodemon --watch CCPSettings/ --exec \"webpack-dev-server --config ./CCPSettings/CCPWebpackConfig.Dev.js\"",
@@ -32,6 +32,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-watch": "^2.0.7",
