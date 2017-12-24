@@ -2,7 +2,7 @@
 const Webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
-// const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const GitRevisionPlugin = require('git-revision-webpack-plugin');
 // const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
 // const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -105,17 +105,17 @@ exports.extractBundles = bundles => ({
   )
 });
 
-// exports.clean = path => ({
-//   plugins: [new CleanWebpackPlugin([path])]
-// });
+exports.clean = path => ({
+  plugins: [new CleanWebpackPlugin([path], { root: process.cwd(), verbose: true })]
+});
 
-// exports.attachRevision = () => ({
-//   plugins: [
-//     new Webpack.BannerPlugin({
-//       banner: new GitRevisionPlugin().version()
-//     })
-//   ]
-// })
+exports.attachRevision = () => ({
+  plugins: [
+    new Webpack.BannerPlugin({
+      banner: new GitRevisionPlugin().version()
+    })
+  ]
+})
 
 // exports.minifyJavaScript = () => ({
 //   plugins: [new UglifyWebpackPlugin]
