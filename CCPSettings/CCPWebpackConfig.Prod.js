@@ -19,7 +19,8 @@ const ProductionConfig = WebpackMerge([
   WebpackConfigHelper.extractBundles([{ name: "vendor", minChunks: ({ resource }) => /node_modules/.test(resource) }]),
   WebpackConfigHelper.clean(CommonConfig.Paths.dist),
   WebpackConfigHelper.attachRevision(),
-  WebpackConfigHelper.uglifyJavaScript()
+  WebpackConfigHelper.uglifyJavaScript(),
+  WebpackConfigHelper.minifyCSS({ options: { discardComments: { removeAll: true }, safe: true } })
 ]);
 
 module.exports = WebpackMerge(CommonConfig.Settings, ProductionConfig);
