@@ -4,7 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const GitRevisionPlugin = require('git-revision-webpack-plugin');
-// const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
+const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
 // const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 // const cssnano = require('cssnano');
 
@@ -117,9 +117,9 @@ exports.attachRevision = () => ({
   ]
 })
 
-// exports.minifyJavaScript = () => ({
-//   plugins: [new UglifyWebpackPlugin]
-// })
+exports.uglifyJavaScript = () => ({
+  plugins: [new UglifyWebpackPlugin]
+})
 
 // exports.minifyCSS = ({ options }) => ({
 //   plugins: [
