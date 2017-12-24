@@ -1,5 +1,5 @@
 // const Path = require('path');
-// const Webpack = require('webpack');
+const Webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
 // const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -99,11 +99,11 @@ exports.generateSourceMaps = ({ type }) => ({
   devtool: type
 });
 
-// exports.extractBundles = bundles => ({
-//   plugins: bundles.map(
-//     bundle => new Webpack.optimize.CommonsChunkPlugin(bundle)
-//   )
-// });
+exports.extractBundles = bundles => ({
+  plugins: bundles.map(
+    bundle => new Webpack.optimize.CommonsChunkPlugin(bundle)
+  )
+});
 
 // exports.clean = path => ({
 //   plugins: [new CleanWebpackPlugin([path])]
