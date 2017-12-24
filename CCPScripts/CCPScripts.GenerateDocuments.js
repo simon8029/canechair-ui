@@ -40,13 +40,16 @@ function getComponentMetaData(componentFile) {
     return {
       ComponentName: getFileName(componentFile),
       ComponentFilePath: componentFile,
-      ComponentMetadata: {
-        ComponentDescription: rawContent.description,
-        ComponentProps: rawContent.props,
-        ComponentCode: rawContent,
-        ComponentSamples: getSamples(componentFile)
-      }
+      // ComponentMetadata: {
+      //   ComponentDescription: rawContent.description,
+      //   ComponentProps: rawContent.props,
+      //   ComponentCode: componentFile,
+      //   ComponentSamples: getSamples(componentFile)
+      // }
+      ComponentMetaData: rawContent,
+      ComponentSamples: getSamples(componentFile)
     }
+
   } catch (error) {
     console.log(Chalk.red(error));
     return {
