@@ -5,9 +5,9 @@
   "scripts": {
     "prestart": "npm run generate:documents",
     "start": "npm-run-all --parallel security-check start:dev generate:documents-watch",
-    "build": "webpack --config ./CCPSettings/CCPWebpackConfig.Prod.js",
-    "build:stats": "webpack --config ./CCPSettings/CCPWebpackConfig.Prod.js --json > stats.json",
-    "start:dev": "nodemon --watch CCPSettings/ --exec \"webpack-dev-server --config ./CCPSettings/CCPWebpackConfig.Dev.js\"",
+    "build": "webpack --config ./CCPSettings/Webpack/CCPWebpackConfig.Prod.js",
+    "build:stats": "webpack --config ./CCPSettings/Webpack/CCPWebpackConfig.Prod.js --json > stats.json",
+    "start:dev": "nodemon --watch CCPSettings/ --exec \"webpack-dev-server --config ./CCPSettings/Webpack/CCPWebpackConfig.Dev.js\"",
     "security-check": "nsp check",
     "generate:documents": "babel-node CCPScripts/CCPScripts.GenerateDocuments.js",
     "generate:documents-watch": "npm run generate:documents -- --watch",
