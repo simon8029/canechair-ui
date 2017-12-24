@@ -20,7 +20,7 @@ const ProductionConfig = WebpackMerge([
   WebpackConfigHelper.purifyCSS({ paths: glob.sync(`${CommonConfig.Paths.src}/**/*.js`, { nodir: true }) }),
   WebpackConfigHelper.loadImages({ options: { limit: 15000, name: "[name].[ext]" } }),
   WebpackConfigHelper.generateSourceMaps({ type: "source-map" }),
-  WebpackConfigHelper.extractBundles([{ name: "vendor", minChunks: ({ resource }) => /node_modules/.test(resource) }]),
+  WebpackConfigHelper.extractBundles([{ name: "vendor", minChunks: ({ resource }) => /node_modules/.test(resource) }, { name: "manifest", minChunks: Infinity }]),
   WebpackConfigHelper.clean(CommonConfig.Paths.dist),
   WebpackConfigHelper.attachRevision(),
   WebpackConfigHelper.uglifyJavaScript(),
