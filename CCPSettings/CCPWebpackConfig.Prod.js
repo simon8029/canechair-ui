@@ -10,7 +10,11 @@ const ProductionConfig = WebpackMerge([
       hints: "warning",
       maxEntrypointSize: 50000,
       maxAssetSize: 450000
-    }
+    },
+    output: {
+      chunkFilename: "[name].[chunkhash:8].js",
+      filename: "[name].[chunkhash:8].js",
+    },
   },
   WebpackConfigHelper.extractCSS({ use: ["css-loader", WebpackConfigHelper.autoprefix()] }),
   WebpackConfigHelper.purifyCSS({ paths: glob.sync(`${CommonConfig.Paths.src}/**/*.js`, { nodir: true }) }),

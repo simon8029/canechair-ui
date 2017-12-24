@@ -1,4 +1,5 @@
 const path = require("path");
+const Webpack = require('webpack');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackConfigHelper = require('./CCPWebpackConfig.Helper');
 const WebpackMerge = require('webpack-merge');
@@ -21,6 +22,7 @@ const Settings = WebpackMerge([
       new HtmlWebpackPlugin({
         title: "CaneChair.Parts",
       }),
+      new Webpack.NamedModulesPlugin()
     ]
   },
   WebpackConfigHelper.transformJavaScript({ include: Paths.src })
