@@ -63,3 +63,4 @@ yarn-debug.log*
 yarn-error.log*
 CCPSettings/CCPComponentsMetaData.json
 CCPSettings/CCPComponentsMetaData.js
+stats.json
