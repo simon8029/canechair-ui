@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Navigation from './Navigation';
+import ComponentPage from './ComponentPage';
 class DocumentPage extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -14,7 +15,7 @@ class DocumentPage extends React.Component {
     return (
       <div id="" className="">
         <Navigation Components={this.state.Components} />
-        {/* <ComponentPage component={component} /> */}
+        <ComponentPage component={this.state.CurrentSelectedComponent} />
       </div>
     );
   }
@@ -27,7 +28,8 @@ function mapStateToProps(state, ownProps) {
   console.log(`state in document page:`);
   console.log(state);
   return {
-    Components: state.Components
+    Components: state.Components,
+    CurrentSelectedComponent: state.Components[2]
   };
 }
 
