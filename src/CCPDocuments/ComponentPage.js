@@ -9,33 +9,40 @@ class ComponentPage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = props;
+    console.log(`this.state:`);
+    console.log(this.state);
+  }
+
+  componentWillReceiveProps(props) {
+    console.log(`componentWillReceiveProps == props:`);
+    console.log(props);
+    this.setState({ CurrentSelectedComponent: props.CurrentSelectedComponent, components: props.components });
   }
 
   render() {
-    if (this.state.Errors && this.state.Errors.length > 0) {
+    if (this.state.CurrentSelectedComponent.Errors && this.state.CurrentSelectedComponent.Errors.length > 0) {
       return (
         <div id="" className="">
-          {this.state.Errors}
+          {this.state.CurrentSelectedComponent.Errors}
         </div>
       );
     } else {
       return (
         <div>
-          <h2>{this.state.ComponentMetaData.props.hasErrors.description}</h2>
-          <h2>{this.state.ComponentName}</h2>
-          <p>{this.state.ComponentMetaData.description}</p>
+          <h2>{this.state.CurrentSelectedComponent.ComponentName}</h2>
+          <p>{this.state.CurrentSelectedComponent.ComponentMetaData.description}</p>
 
-          <h3>Sample{this.state.ComponentMetaData.ComponentSamples && this.state.ComponentMetaData.ComponentSamples.length > 1 && "s"}</h3>
+          <h3>Sample{this.state.CurrentSelectedComponent.ComponentMetaData.ComponentSamples && this.state.CurrentSelectedComponent.ComponentMetaData.ComponentSamples.length > 1 && "s"}</h3>
           {
-            this.state.ComponentMetaData.ComponentSamples && this.state.ComponentMetaData.ComponentSamples.length > 0 ?
-              this.state.ComponentMetaData.ComponentSamples.map(SampleComponent => <SampleComponent key={Samplethis.state.SampleComponentName} SampleComponent={SampleComponent} componentName={ComponentName} />) :
+            this.state.CurrentSelectedComponent.ComponentMetaData.ComponentSamples && this.state.CurrentSelectedComponent.ComponentMetaData.ComponentSamples.length > 0 ?
+              this.state.CurrentSelectedComponent.ComponentMetaData.ComponentSamples.map(SampleComponent => <SampleComponent key={Samplethis.state.CurrentSelectedComponent.SampleComponentName} SampleComponent={SampleComponent} componentName={ComponentName} />) :
               "No SampleComponents exist."
           }
 
           <h3>Props</h3>
           {
-            this.state.ComponentMetaData.props ?
-              <PropsComponent Props={this.state.ComponentMetaData.props} /> :
+            this.state.CurrentSelectedComponent.ComponentMetaData.props ?
+              <PropsComponent Props={this.state.CurrentSelectedComponent.ComponentMetaData.props} /> :
               "This component accepts no Props."
           }
         </div>
@@ -48,9 +55,13 @@ ComponentPage.propTypes = {
   actions: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(store, ownProps) {
+  console.log(`store.CurrentSelectedComponent:`);
+  console.log(store.CurrentSelectedComponent);
   return {
-    state: state
+    Components: store.Components,
+    CurrentSelectedComponent: store.CurrentSelectedComponent,
+    // state: store
   };
 }
 

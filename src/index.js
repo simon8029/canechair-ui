@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { createStore, compose } from 'redux';
 import rootReducer from './CCPReducers';
-import * as CCPActions from './CCPActions';
 import CCPStore from './CCPStore';
 import App from './App';
 import InitialState from './CCPReducers/CCPInitialState';
@@ -11,6 +11,8 @@ import InitialState from './CCPReducers/CCPInitialState';
 
 const store = CCPStore(InitialState);
 ReactDOM.render(
-  <App store={store} />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );

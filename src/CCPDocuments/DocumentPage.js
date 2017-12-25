@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Navigation from './Navigation';
@@ -9,23 +10,25 @@ class DocumentPage extends React.Component {
     this.state = props;
     console.log(`props:`);
     console.log(props);
+    console.log(`context:`);
+    console.log(context);
   }
 
   render() {
     return (
       <div id="" className="">
-        <Navigation {...this.state.Components} />
-        <ComponentPage {...this.state.CurrentSelectedComponent} />
+        <Navigation />
+        <ComponentPage />
       </div>
     );
   }
 }
-// DocumentPage.propTypes = {
-//   actions: PropTypes.object.isRequired
-// };
+DocumentPage.propTypes = {
+  // actions: PropTypes.object.isRequired
+  ownProp1: PropTypes.string
+};
 
 function mapStateToProps(state, ownProps) {
-
   return {
     Components: state.Components,
     CurrentSelectedComponent: state.Components[2]

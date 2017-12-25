@@ -1,5 +1,5 @@
 import DocumentsMetaData from '../../CCPSettings/CCPComponentsMetaData.json';
 export default {
   Components: DocumentsMetaData,
-  CurrentSelectedComponent: DocumentsMetaData[0]
+  CurrentSelectedComponent: DocumentsMetaData[2]
 };

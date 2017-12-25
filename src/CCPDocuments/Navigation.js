@@ -10,16 +10,25 @@ class Navigation extends React.Component {
     super(props, context);
     this.state = props;
     // this.onComponentNameClicked = this.onComponentNameClicked.bind(this);
+    console.log(`this.state from navigation constructor:`);
+    console.log(this.state);
   }
 
   onComponentNameClicked(component) {
-    this.state.actions.reloadComponent(component);
-    this.setState({ message: `${component.ComponentName} clicked.` })
-    console.log(`this.state:`);
-    console.log(this.state);
-    console.log(`this.state.message:`);
-    console.log(this.state.message);
+    console.log(`component.ComponentName:`);
+    console.log(component.ComponentName);
+    console.log(`this.state.CurrentSelectedComponent.ComponentName:`);
+    console.log(this.state.CurrentSelectedComponent.ComponentName);
+    if (component.ComponentName !== this.state.CurrentSelectedComponent.ComponentName) {
+      this.state.actions.reloadComponent(component);
+    }
   };
+
+  componentWillReceiveProps(props) {
+    console.log(`componentWillReceiveProps == props:`);
+    console.log(props);
+    this.setState({ CurrentSelectedComponent: props.CurrentSelectedComponent, components: props.components });
+  }
 
   render() {
     return (
@@ -32,8 +41,7 @@ class Navigation extends React.Component {
                   <span onClick={() => this.onComponentNameClicked(component)}>{component.ComponentName}</span>
                 </li>
               )
-            }
-            )
+            })
           }
         </ul>
       </div>
