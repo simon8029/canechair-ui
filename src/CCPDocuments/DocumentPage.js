@@ -7,15 +7,15 @@ class DocumentPage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = props;
-    console.log(`this.state:`);
-    console.log(this.state);
+    console.log(`props:`);
+    console.log(props);
   }
 
   render() {
     return (
       <div id="" className="">
-        <Navigation Components={this.state.Components} />
-        <ComponentPage component={this.state.CurrentSelectedComponent} />
+        <Navigation {...this.state.Components} />
+        <ComponentPage {...this.state.CurrentSelectedComponent} />
       </div>
     );
   }
@@ -25,8 +25,7 @@ class DocumentPage extends React.Component {
 // };
 
 function mapStateToProps(state, ownProps) {
-  console.log(`state in document page:`);
-  console.log(state);
+
   return {
     Components: state.Components,
     CurrentSelectedComponent: state.Components[2]

@@ -1,43 +1,63 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import SampleComponent from './SampleComponent';
-// import PropsComponent from './PropsComponent';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropsComponent from './PropsComponent';
+import * as ComponentActions from '../CCPActions/CCPComponentActions';
 
-const ComponentPage = ({ component }) => {
-  console.log(`component:`);
-  console.log(component);
-  if (component.Errors && component.Errors.length > 0) {
-    return (
-      <div id="" className="">
-        {component.Errors}
-      </div>
-    );
-  } else {
-    return (
-      <div className="componentpage">
-        <h2>{component.ComponentName}</h2>
-        <p>{component.ComponentMetadata.ComponentDescription}</p>
-
-        <h3>Sample{component.ComponentMetadata.ComponentSampleComponents && component.ComponentMetadata.ComponentSampleComponent.length > 1 && "s"}</h3>
-        {
-          component.ComponentMetadata.ComponentSampleComponents && component.ComponentMetadata.ComponentSampleComponents.length > 0 ?
-            component.ComponentMetadata.ComponentSampleComponents.map(SampleComponent => <SampleComponent key={SampleComponent.SampleComponentName} SampleComponent={SampleComponent} componentName={ComponentName} />) :
-            "No SampleComponents exist."
-        }
-
-        <h3>Props</h3>
-        {
-          component.ComponentMetadata.Props ?
-            <PropsComponent Props={component.ComponentMetadata.Props} /> :
-            "This component accepts no Props."
-        }
-      </div>
-    )
+class ComponentPage extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = props;
   }
-};
+
+  render() {
+    if (this.state.Errors && this.state.Errors.length > 0) {
+      return (
+        <div id="" className="">
+          {this.state.Errors}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <h2>{this.state.ComponentMetaData.props.hasErrors.description}</h2>
+          <h2>{this.state.ComponentName}</h2>
+          <p>{this.state.ComponentMetaData.description}</p>
+
+          <h3>Sample{this.state.ComponentMetaData.ComponentSamples && this.state.ComponentMetaData.ComponentSamples.length > 1 && "s"}</h3>
+          {
+            this.state.ComponentMetaData.ComponentSamples && this.state.ComponentMetaData.ComponentSamples.length > 0 ?
+              this.state.ComponentMetaData.ComponentSamples.map(SampleComponent => <SampleComponent key={Samplethis.state.SampleComponentName} SampleComponent={SampleComponent} componentName={ComponentName} />) :
+              "No SampleComponents exist."
+          }
+
+          <h3>Props</h3>
+          {
+            this.state.ComponentMetaData.props ?
+              <PropsComponent Props={this.state.ComponentMetaData.props} /> :
+              "This component accepts no Props."
+          }
+        </div>
+      )
+    }
+  }
+}
 
 ComponentPage.propTypes = {
-  component: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired
 };
 
-export default ComponentPage;
+function mapStateToProps(state, ownProps) {
+  return {
+    state: state
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(ComponentActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ComponentPage);
