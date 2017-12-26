@@ -8,10 +8,6 @@ class DocumentPage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = props;
-    console.log(`props:`);
-    console.log(props);
-    console.log(`context:`);
-    console.log(context);
   }
 
   render() {

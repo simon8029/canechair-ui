@@ -2,20 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropsComponent from './PropsComponent';
 import * as ComponentActions from '../CCPActions/CCPComponentActions';
+import PropsComponent from './PropsComponent';
+import Sample from './Sample';
 
 class ComponentPage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = props;
-    console.log(`this.state:`);
-    console.log(this.state);
   }
 
   componentWillReceiveProps(props) {
-    console.log(`componentWillReceiveProps == props:`);
-    console.log(props);
     this.setState({ CurrentSelectedComponent: props.CurrentSelectedComponent, components: props.components });
   }
 
@@ -32,11 +29,17 @@ class ComponentPage extends React.Component {
           <h2>{this.state.CurrentSelectedComponent.ComponentName}</h2>
           <p>{this.state.CurrentSelectedComponent.ComponentMetaData.description}</p>
 
-          <h3>Sample{this.state.CurrentSelectedComponent.ComponentMetaData.ComponentSamples && this.state.CurrentSelectedComponent.ComponentMetaData.ComponentSamples.length > 1 && "s"}</h3>
+          <h3>Sample{this.state.CurrentSelectedComponent.ComponentSamples && this.state.CurrentSelectedComponent.ComponentSamples.length > 1 && "s"}</h3>
+          {console.log(`this.state.CurrentSelectedComponent.ComponentSamples:`)}
+          {console.log(this.state.CurrentSelectedComponent.ComponentSamples)}
           {
-            this.state.CurrentSelectedComponent.ComponentMetaData.ComponentSamples && this.state.CurrentSelectedComponent.ComponentMetaData.ComponentSamples.length > 0 ?
-              this.state.CurrentSelectedComponent.ComponentMetaData.ComponentSamples.map(SampleComponent => <SampleComponent key={Samplethis.state.CurrentSelectedComponent.SampleComponentName} SampleComponent={SampleComponent} componentName={ComponentName} />) :
-              "No SampleComponents exist."
+            this.state.CurrentSelectedComponent.ComponentSamples && this.state.CurrentSelectedComponent.ComponentSamples.length > 0 ?
+              this.state.CurrentSelectedComponent.ComponentSamples.map(sample => {
+                console.log(`sample:`);
+                console.log(sample);
+                return <Sample key={sample.SampleName} {...sample} />
+              }) :
+              "No Samples exist."
           }
 
           <h3>Props</h3>
@@ -56,8 +59,6 @@ ComponentPage.propTypes = {
 };
 
 function mapStateToProps(store, ownProps) {
-  console.log(`store.CurrentSelectedComponent:`);
-  console.log(store.CurrentSelectedComponent);
   return {
     Components: store.Components,
     CurrentSelectedComponent: store.CurrentSelectedComponent,

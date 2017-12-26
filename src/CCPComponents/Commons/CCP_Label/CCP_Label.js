@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default CCP_Label;
 /** Label element. */
 // function CCP_Label({ displayFor, displayValue }) {
 //   return (
@@ -13,8 +12,8 @@ export default CCP_Label;
 class CCP_Label extends React.Component {
   render() {
     return (
-      <label style={{ display: 'block' }} htmlFor={displayFor}>
-        {displayValue}
+      <label style={{ display: 'block' }} htmlFor={this.props.DisplayFor}>
+        {this.props.DisplayValue}
       </label>
     )
   }
@@ -22,9 +21,11 @@ class CCP_Label extends React.Component {
 
 CCP_Label.propTypes = {
   /** The associated element's id */
-  displayFor: PropTypes.string.isRequired,
+  DisplayFor: PropTypes.string.isRequired,
 
   /** Label's display value' */
-  displayValue: PropTypes.string.isRequired
+  DisplayValue: PropTypes.string.isRequired
 };
 
+
+export default CCP_Label;

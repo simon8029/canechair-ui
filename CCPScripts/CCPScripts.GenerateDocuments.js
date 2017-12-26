@@ -1,6 +1,7 @@
 const Fs = require('fs');
 const Path = require('path');
 const Chalk = require('chalk');
+const colors = require('colors');
 const ReactDocgen = require('react-docgen');
 const Chokidar = require('chokidar');
 
@@ -40,18 +41,11 @@ function getComponentMetaData(componentFile) {
     return {
       ComponentName: getFileName(componentFile),
       ComponentFilePath: componentFile,
-      // ComponentMetadata: {
-      //   ComponentDescription: rawContent.description,
-      //   ComponentProps: rawContent.props,
-      //   ComponentCode: componentFile,
-      //   ComponentSamples: getSamples(componentFile)
-      // }
       ComponentMetaData: rawContent,
       ComponentSamples: getSamples(componentFile)
     }
 
   } catch (error) {
-    console.log(Chalk.red(error));
     return {
       ComponentName: getFileName(componentFile),
       ComponentFilePath: componentFile,
@@ -96,7 +90,7 @@ function getAllComponentFilesWithAbsolutePath(folderWithAbsolutePath, componentF
     getAllComponentFilesWithAbsolutePath(subFolder, componentFiles
     );
   });
-  componentFiles = removeFilesWithGivenCharacters(componentFiles, ['index.js', 'spec.js']);
+  componentFiles = removeFilesWithGivenCharacters(componentFiles, ['index.js', 'spec.js', 'Sample']);
   return componentFiles;
 };
 
@@ -105,17 +99,16 @@ function getFileName(path) {
 };
 
 function getSamples(componentFile) {
-  let sampleFiles = getSampleFiles(componentFile);
-  console.log(`sampleFiles:`);
-  console.log(sampleFiles);
+  let sampleFiles = getSampleFilesWithAbsolutePath(componentFile);
   if (sampleFiles.length > 0) {
     return sampleFiles.map(function (sampleFile) {
       let content = readFile(sampleFile)
-      let info = parse(content);
+      let info = ReactDocgen.parse(content);
       return {
-        SampleName: sampleFile.slice(0, -3),
+        SampleName: sampleFile.split("\\").pop().slice(0, -3),
         SampleDescription: info.description,
-        SampleCode: content
+        SampleCode: content,
+        SamplePath: sampleFile
       };
     });
   } else {
@@ -123,16 +116,19 @@ function getSamples(componentFile) {
   }
 }
 
-function getSampleFiles(componentFile) {
+function getSampleFilesWithAbsolutePath(componentFile) {
   let exampleFiles = [];
+  let componentFileFolder = Path.dirname(componentFile);
   try {
-    let componentFileFolder = Path.dirname(componentFile);
-    exampleFiles = Fs.readdirSync(`${componentFileFolder}/samples`);
+    exampleFileNames = Fs.readdirSync(`${componentFileFolder}\\Samples`);
   } catch (error) {
-    console.log(`Error happens when get samples: ${error}`);
-    return exampleFiles;
+    return [];
   }
-  return exampleFiles;
+  let sampleFilesWithAbsolutePath = exampleFileNames.map((exampleFile) => {
+    return `${componentFileFolder}\\Samples\\${exampleFile}`;
+  });
+
+  return sampleFilesWithAbsolutePath;
 }
 
 // Given folderpath, return all subfolder's absolute path
