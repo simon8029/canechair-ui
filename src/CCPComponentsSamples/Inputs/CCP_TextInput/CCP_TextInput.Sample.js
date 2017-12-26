@@ -1,5 +1,5 @@
 import React from 'react';
-import CCP_TextInput from '../CCP_TextInput';
+import CCP_TextInput from '../../../CCPComponents/Inputs/CCP_TextInput';
 
 /** Required TextBox with error */
 export default class CCP_TextInputSample extends React.Component {

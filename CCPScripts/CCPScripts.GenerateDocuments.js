@@ -108,19 +108,24 @@ function getSamples(componentFile) {
   // console.log(match[1]);
   // let sampleRelativePath = `../CCPComponentsSamples/${componentRelativePath}`;
   let componentSamplesFolderAbsolutePath = Path.dirname(componentFile.replace(/CCPComponents/, "CCPComponentsSamples"));
-  console.log(`componentSamplesFolderAbsolutePath:`);
+  console.log(`componentSamplesFolderAbsolutePath:`.blue);
   console.log(componentSamplesFolderAbsolutePath);
   let sampleFiles = getSampleFilesWithAbsolutePath(componentSamplesFolderAbsolutePath);
-  let sampleFileRelativePath = "";
+  console.log(`sampleFiles:`.yellow);
+  console.log(sampleFiles);
+
   if (sampleFiles.length > 0) {
     return sampleFiles.map(function (sampleFile) {
       let content = readFile(sampleFile)
       let info = ReactDocgen.parse(content);
+      let sampleFileRelativePath = sampleFile.match(/CCPComponentsSamples(.*)/);
+      console.log(`sampleFileRelativePath:`.green);
+      console.log(sampleFileRelativePath);
       return {
         SampleName: sampleFile.split("\\").pop().slice(0, -3),
         SampleDescription: info.description,
         SampleCode: content,
-        SamplePath: sampleFile
+        SamplePath: sampleFileRelativePath[1].replace(/\\/g, "/").slice(0, -3),
       };
     });
   } else {

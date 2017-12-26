@@ -22,17 +22,21 @@ class Sample extends React.Component {
   render() {
     const { sampleDisplayStatus } = this.state;
     const { SampleCode, SampleDescription, SampleName, SamplePath } = this.props;
-    let samplePath = SamplePath.replace(/\\/g, '/').slice(0, -3);
+    console.log(`SamplePath:`);
+    console.log(SamplePath);
+    // let samplePath = SamplePath.replace(/\\/g, '/').slice(0, -3);
     // let samplePath = "../CCPComponents/Inputs/CCP_TextInput/Samples/CCP_TextInput.Sample";
     // const SampleComponent = require(`${samplePath}`).default;
-    const SampleComponent = require('../CCPComponents/Inputs/CCP_TextInput/Samples/CCP_TextInput.Sample').default;
-
+    const SampleComponent = require(`../CCPComponentsSamples/Inputs/CCP_TextInput/CCP_TextInput.Sample`).default;
+    // const SampleComponent = require(`../CCPComponentsSamples${SamplePath}`).default;
+    console.log(`SampleComponent:`);
+    console.log(SampleComponent);
     return (
       <div className="Sample">
         {SampleName && <h4>{SampleName}</h4>}
         {SampleDescription && <h4>{SampleDescription}</h4>}
 
-        <SampleComponent />
+        {/* <SampleComponent /> */}
         {/* <CcpTextInputSample /> */}
         {/* <CcpTextInputSample /> */}
 
