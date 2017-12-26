@@ -99,7 +99,19 @@ function getFileName(path) {
 };
 
 function getSamples(componentFile) {
-  let sampleFiles = getSampleFilesWithAbsolutePath(componentFile);
+  console.log(`componentFile:`);
+  console.log(componentFile);
+
+  // let regex = /CCPComponents(.*)/g;
+  // let componentRelativePath = regex.exec(Path.dirname(componentFile)); // Get component's relative path
+  // console.log(`match:`);
+  // console.log(match[1]);
+  // let sampleRelativePath = `../CCPComponentsSamples/${componentRelativePath}`;
+  let componentSamplesFolderAbsolutePath = Path.dirname(componentFile.replace(/CCPComponents/, "CCPComponentsSamples"));
+  console.log(`componentSamplesFolderAbsolutePath:`);
+  console.log(componentSamplesFolderAbsolutePath);
+  let sampleFiles = getSampleFilesWithAbsolutePath(componentSamplesFolderAbsolutePath);
+  let sampleFileRelativePath = "";
   if (sampleFiles.length > 0) {
     return sampleFiles.map(function (sampleFile) {
       let content = readFile(sampleFile)
@@ -116,16 +128,17 @@ function getSamples(componentFile) {
   }
 }
 
-function getSampleFilesWithAbsolutePath(componentFile) {
-  let exampleFiles = [];
-  let componentFileFolder = Path.dirname(componentFile);
+function getSampleFilesWithAbsolutePath(componentSamplesFolderAbsolutePath) {
+  // let exampleFiles = [];
+  // let componentRelativePath = componentFile.split('\\').indexOf("CCPComponents")
+  // let componentFileFolder = Path.dirname(componentFile);
   try {
-    exampleFileNames = Fs.readdirSync(`${componentFileFolder}\\Samples`);
+    exampleFileNames = Fs.readdirSync(componentSamplesFolderAbsolutePath);
   } catch (error) {
     return [];
   }
   let sampleFilesWithAbsolutePath = exampleFileNames.map((exampleFile) => {
-    return `${componentFileFolder}\\Samples\\${exampleFile}`;
+    return `${componentSamplesFolderAbsolutePath}\\${exampleFile}`;
   });
 
   return sampleFilesWithAbsolutePath;
