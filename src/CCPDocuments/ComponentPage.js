@@ -30,13 +30,9 @@ class ComponentPage extends React.Component {
           <p>{this.state.CurrentSelectedComponent.ComponentMetaData.description}</p>
 
           <h3>Sample{this.state.CurrentSelectedComponent.ComponentSamples && this.state.CurrentSelectedComponent.ComponentSamples.length > 1 && "s"}</h3>
-          {console.log(`this.state.CurrentSelectedComponent.ComponentSamples:`)}
-          {console.log(this.state.CurrentSelectedComponent.ComponentSamples)}
           {
             this.state.CurrentSelectedComponent.ComponentSamples && this.state.CurrentSelectedComponent.ComponentSamples.length > 0 ?
               this.state.CurrentSelectedComponent.ComponentSamples.map(sample => {
-                console.log(`sample:`);
-                console.log(sample);
                 return <Sample key={sample.SampleName} {...sample} />
               }) :
               "No Samples exist."
