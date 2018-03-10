@@ -1,22 +1,40 @@
 import * as React from 'react';
-import './App.css';
-
-const logo = require('./logo.svg');
+import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
+import { Redirect, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { IntlProvider } from 'react-intl';
+import 'react-big-calendar/lib/less/styles.less';
+import 'styles/bootstrap.scss';
+import 'styles/app.scss';
 
 class App extends React.Component {
   render() {
+    const { match, location, themeColor, isDarkTheme, locale, authUser } = this.props;
+
+    if (location.pathname === '/') {
+      if (authUser === null) {
+        return (<Redirect to={'/signin'} />);
+      } else {
+        return (<Redirect to={'/app/dashboard/default'} />);
+      }
+    }
+
+    const currentAppLocale = AppLocale[locale.locale];
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
+      <div className="app-main">
+        <RestrictedRoute path={`${match.url}app`}
+          authUser={authUser} component={MainApp} />
+        <Route path='/signin' component={SignIn} />
+        <Route path='/signup' component={SignUp} />
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = ({ settings, auth }) => {
+  const { themeColor, sideNavColor, darkTheme, locale } = settings;
+  const { authUser } = auth;
+  return { themeColor, sideNavColor, isDarkTheme: darkTheme, locale, authUser }
+};
+
+export default connect(mapStateToProps)(App);

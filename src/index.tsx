@@ -13,8 +13,6 @@ ReactDOM.render(
   <Provider store={Store}>
     <ConnectedRouter history={history}>
       <div>
-        <Link to="/singleComponentGenerator">Single Component | </Link>
-        <Link to="/schemas">Schemas</Link>
         <Switch>
           <Route exact path="/" component={App} />
           {/* <Route exact path="/schemas" component={SchemaMain} />
