@@ -4,8 +4,10 @@
     ],
     "rules": {
         "jsx-boolean-value": false,
+        "jsx-wrap-multiline": false,
+        "jsx-alignment": false,
         "align": [
-            true,
+            false,
             "parameters",
             "arguments",
             "statements"
@@ -25,7 +27,7 @@
         ],
         "interface-name": [
             true,
-            "never-prefix"
+            "always-prefix"
         ],
         "jsdoc-format": true,
         "jsx-no-lambda": false,
@@ -33,7 +35,7 @@
         "label-position": true,
         "max-line-length": [
             true,
-            120
+            320
         ],
         "member-ordering": [
             true,
@@ -41,7 +43,7 @@
             "static-before-instance",
             "variables-before-functions"
         ],
-        "no-any": true,
+        "no-any": false,
         "no-arg": true,
         "no-bitwise": true,
         "no-console": [
