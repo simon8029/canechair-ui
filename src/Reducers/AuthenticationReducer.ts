@@ -1,5 +1,5 @@
 import * as AuthenticationActionTypes from 'Types/ActionTypes/AuthenticationActionTypes';
-import { IAuthenticationAction } from 'Interfaces/ActionInterfaces/IAuthenticationAction';
+import { IAuthenticationAction, IUserSignUpSuccess, IUserSignInSuccess } from 'Interfaces/ActionInterfaces/IAuthenticationAction';
 import { UserModel } from 'Types/ModelTypes/AuthenticationTypes/UserModel';
 import { AuthenticationStateType } from 'Types/StateTypes/AuthenticationStateType';
 
@@ -16,83 +16,54 @@ export function AuthenticationReducer(state: typeof INIT_STATE = INIT_STATE, Aut
       return {
         ...state,
         Loader: false,
-        CurrentUser: AuthenticationAction.CurrentUser
+        CurrentUser: (AuthenticationAction as IUserSignUpSuccess).CurrentUser
       };
     }
     case AuthenticationActionTypes.AUTHENTICATION_SIGNIN_USER_SUCCESS: {
       return {
         ...state,
         Loader: false,
-        CurrentUser: AuthenticationAction.CurrentUser
+        CurrentUser: (AuthenticationAction as IUserSignInSuccess).CurrentUser
       };
     }
     case AuthenticationActionTypes.AUTHENTICATION_SIGNOUT_USER_SUCCESS: {
       return {
         ...state,
-        authUser: null,
-        loader: false
-      }
+        Loader: false,
+        CurrentUser: null,
+      };
     }
 
-    case AuthenticationActionTypes.AUTHENTICATION_SIGNIN_GOOGLE_USER_SUCCESS: {
+    case AuthenticationActionTypes.AUTHENTICATION_SHOW_LOADER: {
       return {
         ...state,
-        loader: false,
-        authUser: action.payload
-      }
+        Loader: true
+      };
     }
-    case AuthenticationActionTypes.AUTHENTICATION_SIGNIN_FACEBOOK_USER_SUCCESS: {
+    case AuthenticationActionTypes.AUTHENTICATION_HIDE_LOADER: {
       return {
         ...state,
-        loader: false,
-        authUser: action.payload
-      }
-    }
-    case AuthenticationActionTypes.AUTHENTICATION_SIGNIN_TWITTER_USER_SUCCESS: {
-      return {
-        ...state,
-        loader: false,
-        authUser: action.payload
-      }
-    }
-    case AuthenticationActionTypes.AUTHENTICATION_SIGNIN_GITHUB_USER_SUCCESS: {
-      return {
-        ...state,
-        loader: false,
-        authUser: action.payload
-      }
-    }
-    case AuthenticationActionTypes.AUTHENTICATION_ON_SHOW_LOADER: {
-      return {
-        ...state,
-        loader: true
-      }
-    }
-    case AuthenticationActionTypes.AUTHENTICATION_ON_HIDE_LOADER: {
-      return {
-        ...state,
-        loader: false
-      }
+        Loader: false
+      };
     }
 
     case AuthenticationActionTypes.AUTHENTICATION_SHOW_MESSAGE: {
       return {
         ...state,
-        alertMessage: action.payload,
-        showMessage: true,
-        loader: false
-      }
+        AlertMessage: AuthenticationAction.AuthenticationMessage,
+        ShowMessage: true,
+        Loader: false
+      };
     }
     case AuthenticationActionTypes.AUTHENTICATION_HIDE_MESSAGE: {
       return {
         ...state,
-        alertMessage: '',
-        showMessage: false,
-        loader: false
-      }
+        AlertMessage: '',
+        ShowMessage: false,
+        Loader: false
+      };
     }
     default:
       return state;
   }
-}
 }

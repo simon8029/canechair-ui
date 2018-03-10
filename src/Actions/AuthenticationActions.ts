@@ -4,7 +4,6 @@ import { beginAjaxCall, ajaxCallError } from './CommonActions';
 import { Dispatch } from 'react-redux';
 import AuthenticationService from 'Services/AuthenticationServices';
 import { UserModel } from 'Types/ModelTypes/AuthenticationTypes/UserModel';
-import { AuthenticationStateType } from 'Types/StateTypes/AuthenticationStateType';
 
 export const UserSignUp = (currentUser: UserModel) => {
   return function (dispatch: Dispatch<IAuthenticationAction>) {
@@ -59,30 +58,30 @@ export const UserSignInSuccess = (currentUser: UserModel): IAuthenticationAction
 
 export const UserSignOutSuccess = (): IAuthenticationAction => {
   return {
-    type: AuthenticationActionTypes.AUTHENTICATION_SIGNOUT_USER_SUCCES,
+    type: AuthenticationActionTypes.AUTHENTICATION_SIGNOUT_USER_SUCCESS,
   };
 };
 
-export const showAuthMessage = (message: string): IAuthenticationAction => {
+export const ShowAuthenticationMessage = (message: string): IAuthenticationAction => {
   return {
     type: AuthenticationActionTypes.AUTHENTICATION_SHOW_MESSAGE,
-    payload: message
+    AuthenticationMessage: message
   };
 };
 
-export const showAuthLoader = () => {
+export const ShowAuthenticationLoader = (): IAuthenticationAction => {
   return {
-    type: ON_SHOW_LOADER,
+    type: AuthenticationActionTypes.AUTHENTICATION_SHOW_LOADER
   };
 };
 
-export const hideMessage = () => {
+export const HideAuthenticationMessage = (): IAuthenticationAction => {
   return {
-    type: HIDE_MESSAGE,
+    type: AuthenticationActionTypes.AUTHENTICATION_HIDE_MESSAGE,
   };
 };
-export const hideAuthLoader = () => {
+export const HideAuthenticationLoader = (): IAuthenticationAction => {
   return {
-    type: ON_HIDE_LOADER,
+    type: AuthenticationActionTypes.AUTHENTICATION_HIDE_LOADER,
   };
 };

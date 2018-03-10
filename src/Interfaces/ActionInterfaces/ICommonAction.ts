@@ -1,10 +1,10 @@
-import * as CommonActionTypes from 'types/actionTypes/CommonActionTypes';
+import * as CommonActionTypes from 'Types/ActionTypes/CommonActionTypes';
 
 export type IBeginAjaxCall = {
-    type: CommonActionTypes.BEGIN_AJAX_CALL;
+  type: CommonActionTypes.BEGIN_AJAX_CALL;
 };
 
 export type IAjaxCallError = {
-    type: CommonActionTypes.AJAX_CALL_ERROR;
-    error: Error;
+  type: CommonActionTypes.AJAX_CALL_ERROR;
+  error: Error;
 };
