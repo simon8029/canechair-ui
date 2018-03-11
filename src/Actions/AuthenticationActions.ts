@@ -1,47 +1,10 @@
 import * as AuthenticationActionTypes from 'Types/ActionTypes/AuthenticationActionTypes';
 import { IAuthenticationAction } from 'Interfaces/ActionInterfaces/IAuthenticationAction';
-import { beginAjaxCall, ajaxCallError } from './CommonActions';
+import { beginAjaxCall, ajaxCallError } from 'Actions/CommonActions';
 import { Dispatch } from 'react-redux';
 import AuthenticationService from 'Services/AuthenticationServices';
 import { UserModel } from 'Types/ModelTypes/AuthenticationTypes/UserModel';
 
-export const UserSignUp = (currentUser: UserModel) => {
-  return function (dispatch: Dispatch<IAuthenticationAction>) {
-    dispatch(beginAjaxCall());
-    return AuthenticationService.UserSignUp(currentUser)
-      .then((res: UserModel) => {
-        dispatch(UserSignUpSuccess(res));
-      }).catch((error: Error) => {
-        dispatch(ajaxCallError(error));
-        throw (error);
-      });
-  };
-};
-
-export const userSignIn = (currentUser: UserModel) => {
-  return function (dispatch: Dispatch<IAuthenticationAction>) {
-    dispatch(beginAjaxCall());
-    return AuthenticationService.UserSignIn(currentUser)
-      .then((res: UserModel) => {
-        dispatch(UserSignInSuccess(res));
-      }).catch((error: Error) => {
-        dispatch(ajaxCallError(error));
-        throw (error);
-      });
-  };
-};
-export const UserSignOut = (currentUser: UserModel) => {
-  return function (dispatch: Dispatch<IAuthenticationAction>) {
-    dispatch(beginAjaxCall());
-    return AuthenticationService.UserSignOut(currentUser)
-      .then(() => {
-        dispatch(UserSignOutSuccess());
-      }).catch((error: Error) => {
-        dispatch(ajaxCallError(error));
-        throw (error);
-      });
-  };
-};
 export const UserSignUpSuccess = (currentUser: UserModel): IAuthenticationAction => {
   return {
     type: AuthenticationActionTypes.AUTHENTICATION_SIGNUP_USER_SUCCESS,
@@ -83,5 +46,43 @@ export const HideAuthenticationMessage = (): IAuthenticationAction => {
 export const HideAuthenticationLoader = (): IAuthenticationAction => {
   return {
     type: AuthenticationActionTypes.AUTHENTICATION_HIDE_LOADER,
+  };
+};
+
+export const UserSignUp = (currentUser: UserModel) => {
+  return function (dispatch: Dispatch<IAuthenticationAction>) {
+    dispatch(beginAjaxCall());
+    return AuthenticationService.UserSignUp(currentUser)
+      .then((res: UserModel) => {
+        dispatch(UserSignUpSuccess(res));
+      }).catch((error: Error) => {
+        dispatch(ajaxCallError(error));
+        throw (error);
+      });
+  };
+};
+
+export const userSignIn = (currentUser: UserModel) => {
+  return function (dispatch: Dispatch<IAuthenticationAction>) {
+    dispatch(beginAjaxCall());
+    return AuthenticationService.UserSignIn(currentUser)
+      .then((res: UserModel) => {
+        dispatch(UserSignInSuccess(res));
+      }).catch((error: Error) => {
+        dispatch(ajaxCallError(error));
+        throw (error);
+      });
+  };
+};
+export const UserSignOut = (currentUser: UserModel) => {
+  return function (dispatch: Dispatch<IAuthenticationAction>) {
+    dispatch(beginAjaxCall());
+    return AuthenticationService.UserSignOut(currentUser)
+      .then(() => {
+        dispatch(UserSignOutSuccess());
+      }).catch((error: Error) => {
+        dispatch(ajaxCallError(error));
+        throw (error);
+      });
   };
 };

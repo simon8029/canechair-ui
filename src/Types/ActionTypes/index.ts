@@ -1,2 +1,2 @@
-export * from './CommonActiontypes';
+export * from './CommonActionTypes';
 export * from './AuthenticationActionTypes';

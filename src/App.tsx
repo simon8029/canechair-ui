@@ -1,46 +1,94 @@
 import * as React from 'react';
-import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
-import { Redirect, Route } from 'react-router-dom';
+import { MuiThemeProvider, getMuiTheme } from 'material-ui/styles';
+import { withRouter, Redirect, Route, RouteComponentProps } from 'react-router-dom';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-intl';
+import UserModel from 'Types/ModelTypes/AuthenticationTypes/UserModel';
 import 'react-big-calendar/lib/less/styles.less';
 import 'styles/bootstrap.scss';
 import 'styles/app.scss';
+import DefaultTheme from 'Themes/DefaultTheme';
+import AppLocale from 'Utilities/LanguageProvider';
+import PrivateRoute from 'Parts/Authentication/PrivateRoute';
+import SignIn from 'Parts/Authentication/SignIn';
+// import SignUp from 'Parts/Authentication/SignUp';
 import ShowCase from 'ShowCase/index';
 
-const RestrictedRoute = ({ component: Component, ...rest, authUser }: any) =>
-  <Route
-    {...rest} render={props => authUser
-      ? <Component {...props} />
-      : <Redirect to={{ pathname: '/signin', state: { from: props.location } }} />}
-  />;
+class App extends React.Component<ThisPropsType, ThisStateType> {
 
-class App extends React.Component {
   render() {
-    const { match, location, themeColor, isDarkTheme, locale, authUser }: any = this.props;
-
+    // const { match, location, authUser, locale } = this.props;
     if (location.pathname === '/') {
-      if (authUser === null) {
-        return (<Redirect to={'/signin'} />);
+      if (this.props.CurrentUser === null) {
+        return (<Redirect to={'/SignIn'} />);
       } else {
-        return (<Redirect to={'/app/dashboard/default'} />);
+        return (<Redirect to={'/ShowCase'} />);
       }
     }
 
+    console.log('connecting with ');
+    console.log(`this.props:`);
+    console.log(this.props);
+    const currentAppLocale = AppLocale[this.props.locale.locale];
     return (
-      <div className="show-case">
-        <RestrictedRoute path={`${match.url}app`} authUser={authUser} component={ShowCase} />
-        <Route path='/signin' component={SignIn} />
-        <Route path='/signup' component={SignUp} />
-      </div>
+      <MuiThemeProvider muiTheme={getMuiTheme(DefaultTheme)}>
+        <IntlProvider
+          locale={currentAppLocale.locale}
+          messages={currentAppLocale.messages}
+        >
+          <div className="app-main">
+            <PrivateRoute path="/" component={ShowCase} />
+            <Route path="/SignIn" component={SignIn} />
+            {/* <Route path="/signup" component={SignUp} /> */}
+          </div>
+        </IntlProvider>
+      </MuiThemeProvider>
     );
   }
 }
 
-const mapStateToProps = ({ settings, auth }: any) => {
-  const { themeColor, sideNavColor, darkTheme, locale } = settings;
-  const { authUser } = auth;
-  return { themeColor, sideNavColor, isDarkTheme: darkTheme, locale, authUser }
+// const mapStateToProps = ({ settings, auth }) => {
+//   const { sideNavColor, locale } = settings;
+//   const { authUser } = auth;
+//   return { sideNavColor, locale, authUser }
+// };
+
+function mapStateToProps(state: StateToPropsType): StateToPropsType {
+  return {
+    CurrentUser: state.CurrentUser,
+    match: state.match,
+    location: state.location,
+    locale: state.locale
+  };
+}
+
+function mapDispatchToProps(dispatch: Dispatch<any>): DispatchToPropsType {
+  return {
+    actions: {
+    }
+  };
+}
+
+type ThisPropsType = StateToPropsType & DispatchToPropsType & OwnProps;
+
+type ThisStateType = {
+  email: string,
+  password: string
 };
 
-export default connect(mapStateToProps)(App);
+type StateToPropsType = {
+  match: any,
+  location: any,
+  CurrentUser: UserModel,
+  locale: any
+};
+
+type DispatchToPropsType = {
+  actions: {
+  }
+};
+
+type OwnProps = RouteComponentProps<any>;
+
+export default withRouter(connect<StateToPropsType, DispatchToPropsType, OwnProps>(mapStateToProps, mapDispatchToProps)(App));
