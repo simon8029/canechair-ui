@@ -2,14 +2,14 @@ import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-class ShowCase extends React.Component<ThisPropsType, ThisStateType> {
+class BBB extends React.Component<ThisPropsType, ThisStateType> {
   render() {
     return (
       <div >
         <div className="app-main-container">
           <div className="app-header">
             {/* <Header drawerType={drawerType} onToggleCollapsedNav={this.onToggleCollapsedNav} /> */}
-            show case.
+            b.
           </div>
 
           <main className="app-main-content-wrapper">
@@ -49,4 +49,4 @@ type OwnProps = RouteComponentProps<any>;
 
 type ThisPropsType = StateToPropsType & DispatchToPropsType & OwnProps;
 
-export default withRouter(connect<StateToPropsType, DispatchToPropsType, OwnProps>(mapStateToProps, mapDispatchToProps)(ShowCase));
+export default withRouter(connect<StateToPropsType, DispatchToPropsType, OwnProps>(mapStateToProps, mapDispatchToProps)(BBB));
