@@ -1,13 +1,12 @@
 import * as AuthenticationActionTypes from 'Types/ActionTypes/AuthenticationActionTypes';
 import { IAuthenticationAction, IUserSignUpSuccess, IUserSignInSuccess } from 'Interfaces/ActionInterfaces/IAuthenticationAction';
-import { UserModel } from 'Types/ModelTypes/AuthenticationTypes/UserModel';
 import { AuthenticationStateType } from 'Types/StateTypes/AuthenticationStateType';
 
 const INIT_STATE: AuthenticationStateType = {
   Loader: false,
   AlertMessage: '',
   ShowMessage: false,
-  CurrentUser: new UserModel()
+  CurrentUser: null
 };
 
 export function AuthenticationReducer(state: typeof INIT_STATE = INIT_STATE, AuthenticationAction: IAuthenticationAction): AuthenticationStateType {
@@ -67,3 +66,5 @@ export function AuthenticationReducer(state: typeof INIT_STATE = INIT_STATE, Aut
       return state;
   }
 }
+
+export default AuthenticationReducer;

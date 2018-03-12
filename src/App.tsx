@@ -4,33 +4,47 @@ import { withRouter, Redirect, Route, RouteComponentProps } from 'react-router-d
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-intl';
-import UserModel from 'Types/ModelTypes/AuthenticationTypes/UserModel';
 import 'react-big-calendar/lib/less/styles.less';
 import 'styles/bootstrap.scss';
 import 'styles/app.scss';
 import DefaultTheme from 'Themes/DefaultTheme';
 import AppLocale from 'Utilities/LanguageProvider';
-import PrivateRoute from 'Parts/Authentication/PrivateRoute';
+// import { PrivateRoute } from 'Parts/Authentication/PrivateRoute';
 import SignIn from 'Parts/Authentication/SignIn';
 // import SignUp from 'Parts/Authentication/SignUp';
 import ShowCase from 'ShowCase/index';
+import { StoreStateType } from 'Types/StateTypes/StoreStateType';
 
+const PrivateRoute: any = ({ component: Component, isAuthenticated }: any) =>
+  <Route
+    render={props =>
+      isAuthenticated
+        ? <Component {...props} />
+        : <Redirect
+          to={{
+            pathname: '/SignIn',
+            state: { from: props.location }
+          }}
+        />}
+  />;
 class App extends React.Component<ThisPropsType, ThisStateType> {
 
   render() {
-    // const { match, location, authUser, locale } = this.props;
-    if (location.pathname === '/') {
-      if (this.props.CurrentUser === null) {
-        return (<Redirect to={'/SignIn'} />);
-      } else {
-        return (<Redirect to={'/ShowCase'} />);
-      }
-    }
-
-    console.log('connecting with ');
+    // if (location.pathname === '/') {
+    //   if (this.props.Authentication.CurrentUser === null) {
+    //     return (<Redirect to={'/SignIn'} />);
+    //   } else {
+    //     return (<Redirect to={'/ShowCase'} />);
+    //   }
+    // }
+    const { match } = this.props;
+    const currentAppLocale = AppLocale[this.props.Settings.Locale];
     console.log(`this.props:`);
     console.log(this.props);
-    const currentAppLocale = AppLocale[this.props.locale.locale];
+    console.log(`match:`);
+    console.log(match);
+    console.log(`currentAppLocale:`);
+    console.log(currentAppLocale);
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(DefaultTheme)}>
         <IntlProvider
@@ -38,7 +52,8 @@ class App extends React.Component<ThisPropsType, ThisStateType> {
           messages={currentAppLocale.messages}
         >
           <div className="app-main">
-            <PrivateRoute path="/" component={ShowCase} />
+            app
+              <PrivateRoute path="/ShowCase" component={ShowCase} />
             <Route path="/SignIn" component={SignIn} />
             {/* <Route path="/signup" component={SignUp} /> */}
           </div>
@@ -48,18 +63,13 @@ class App extends React.Component<ThisPropsType, ThisStateType> {
   }
 }
 
-// const mapStateToProps = ({ settings, auth }) => {
-//   const { sideNavColor, locale } = settings;
-//   const { authUser } = auth;
-//   return { sideNavColor, locale, authUser }
-// };
-
-function mapStateToProps(state: StateToPropsType): StateToPropsType {
+function mapStateToProps(state: StoreStateType): StateToPropsType {
+  console.log(`state:`);
+  console.log(state);
   return {
-    CurrentUser: state.CurrentUser,
-    match: state.match,
-    location: state.location,
-    locale: state.locale
+    Authentication: state.Authentication,
+    Routing: state.Routing,
+    Settings: state.Settings
   };
 }
 
@@ -77,12 +87,7 @@ type ThisStateType = {
   password: string
 };
 
-type StateToPropsType = {
-  match: any,
-  location: any,
-  CurrentUser: UserModel,
-  locale: any
-};
+type StateToPropsType = StoreStateType;
 
 type DispatchToPropsType = {
   actions: {

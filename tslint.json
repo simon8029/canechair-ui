@@ -109,7 +109,7 @@
       }
     ],
     "variable-name": [
-      true,
+      false,
       "ban-keywords",
       "check-format",
       "allow-leading-underscore",

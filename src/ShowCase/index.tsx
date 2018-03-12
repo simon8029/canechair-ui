@@ -9,6 +9,7 @@ class App extends React.Component<ThisPropsType, ThisStateType> {
         <div className="app-main-container">
           <div className="app-header">
             {/* <Header drawerType={drawerType} onToggleCollapsedNav={this.onToggleCollapsedNav} /> */}
+            show case.
           </div>
 
           <main className="app-main-content-wrapper">

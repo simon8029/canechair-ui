@@ -38,6 +38,7 @@ class SignIn extends React.Component<ThisPropsType, ThisStateType> {
     //   password
     // } = this.state;
     // const { showMessage, loader, alertMessage } = this.props;
+    console.log(`signin tsx:`);
     return (
       // <div
       //   className="app-login-container d-flex justify-content-center align-items-center animated slideInUpTiny animation-duration-3">
