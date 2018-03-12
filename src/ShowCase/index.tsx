@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { MuiThemeProvider, getMuiTheme } from 'material-ui/styles';
-import { withRouter, Route, RouteComponentProps } from 'react-router-dom';
+import { withRouter, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-intl';
@@ -10,6 +10,7 @@ import 'styles/app.scss';
 import DefaultTheme from 'Themes/DefaultTheme';
 import AppLocale from 'Utilities/LanguageProvider';
 import { StoreStateType } from 'Types/StateTypes/StoreStateType';
+import DashBoard from 'ShowCase/DashBoard/index';
 import BBB from 'bbb';
 
 class ShowCase extends React.Component<ThisPropsType, ThisStateType> {
@@ -25,8 +26,11 @@ class ShowCase extends React.Component<ThisPropsType, ThisStateType> {
           messages={currentAppLocale.messages}
         >
           <div className="app-main">
-
-            <Route path={`${match.url}/bbb`} component={BBB} />
+            <Switch>
+              <Route path={`${match.url}/DashBoard`} component={DashBoard} />
+              <Route path={`${match.url}/bbb`} component={BBB} />
+              <Route path="" component={DashBoard} />
+            </Switch>
           </div>
         </IntlProvider>
       </MuiThemeProvider>

@@ -7,7 +7,6 @@ import { ConnectedRouter } from 'react-router-redux';
 import Store, { history } from 'Store/Store';
 import FourOhFour from 'Parts/Common/404';
 import ShowCase from 'ShowCase/index';
-import DashBoard from 'ShowCase/DashBoard/index';
 import { PrivateRoute } from 'Parts/Authentication/PrivateRoute';
 import registerServiceWorker from './registerServiceWorker';
 import SignIn from 'Parts/Authentication/SignIn';
@@ -19,7 +18,6 @@ ReactDOM.render(
       {/* <PrivateRoute Path="/" Component={App} IsAuthenticated={false} /> */}
       <Switch>
         <PrivateRoute path="/ShowCase" component={ShowCase} />
-        <PrivateRoute path="/ShowCase/DashBoard" component={DashBoard} />
         <Route path="/SignIn" component={SignIn} />
         <Route path="" component={FourOhFour} />
       </Switch>
