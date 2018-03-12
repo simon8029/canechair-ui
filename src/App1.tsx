@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { MuiThemeProvider, getMuiTheme } from 'material-ui/styles';
-import { withRouter, Redirect, Route, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-intl';
@@ -10,23 +10,12 @@ import 'styles/app.scss';
 import DefaultTheme from 'Themes/DefaultTheme';
 import AppLocale from 'Utilities/LanguageProvider';
 // import { PrivateRoute } from 'Parts/Authentication/PrivateRoute';
-import SignIn from 'Parts/Authentication/SignIn';
+// import SignIn from 'Parts/Authentication/SignIn';
 // import SignUp from 'Parts/Authentication/SignUp';
-import ShowCase from 'ShowCase/index';
+// import ShowCase from 'ShowCase/index';
 import { StoreStateType } from 'Types/StateTypes/StoreStateType';
+// import FourOhFour from 'Parts/Common/404';
 
-const PrivateRoute: any = ({ component: Component, isAuthenticated }: any) =>
-  <Route
-    render={props =>
-      isAuthenticated
-        ? <Component {...props} />
-        : <Redirect
-          to={{
-            pathname: '/SignIn',
-            state: { from: props.location }
-          }}
-        />}
-  />;
 class App extends React.Component<ThisPropsType, ThisStateType> {
 
   render() {
@@ -37,14 +26,8 @@ class App extends React.Component<ThisPropsType, ThisStateType> {
     //     return (<Redirect to={'/ShowCase'} />);
     //   }
     // }
-    const { match } = this.props;
+    // const { match } = this.props;
     const currentAppLocale = AppLocale[this.props.Settings.Locale];
-    console.log(`this.props:`);
-    console.log(this.props);
-    console.log(`match:`);
-    console.log(match);
-    console.log(`currentAppLocale:`);
-    console.log(currentAppLocale);
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(DefaultTheme)}>
         <IntlProvider
@@ -53,9 +36,11 @@ class App extends React.Component<ThisPropsType, ThisStateType> {
         >
           <div className="app-main">
             app
-              <PrivateRoute path="/ShowCase" component={ShowCase} />
-            <Route path="/SignIn" component={SignIn} />
+              {/* <PrivateRoute Path={`${match.url}/ShowCase`} Component={ShowCase} IsAuthenticated={false} /> */}
+            {/* <Route path="/ShowCase" component={ShowCase} /> */}
+            {/* <Route path="/SignIn" component={SignIn} /> */}
             {/* <Route path="/signup" component={SignUp} /> */}
+            {/* <Route path="" component={FourOhFour} /> */}
           </div>
         </IntlProvider>
       </MuiThemeProvider>
