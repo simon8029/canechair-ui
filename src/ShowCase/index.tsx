@@ -1,35 +1,47 @@
 import * as React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { MuiThemeProvider, getMuiTheme } from 'material-ui/styles';
+import { withRouter, Route, RouteComponentProps } from 'react-router-dom';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { IntlProvider } from 'react-intl';
+import 'react-big-calendar/lib/less/styles.less';
+import 'styles/bootstrap.scss';
+import 'styles/app.scss';
+import DefaultTheme from 'Themes/DefaultTheme';
+import AppLocale from 'Utilities/LanguageProvider';
+import { StoreStateType } from 'Types/StateTypes/StoreStateType';
+import BBB from 'bbb';
+
 class ShowCase extends React.Component<ThisPropsType, ThisStateType> {
   render() {
-    return (
-      <div >
-        <div className="app-main-container">
-          <div className="app-header">
-            {/* <Header drawerType={drawerType} onToggleCollapsedNav={this.onToggleCollapsedNav} /> */}
-            show case.
-          </div>
+    // const { match } = this.props;
+    const currentAppLocale = AppLocale[this.props.Settings.Locale];
 
-          <main className="app-main-content-wrapper">
-            <div className="app-main-content" />
-          </main>
-        </div>
-      </div>
+    return (
+      <MuiThemeProvider muiTheme={getMuiTheme(DefaultTheme)}>
+        <IntlProvider
+          locale={currentAppLocale.locale}
+          messages={currentAppLocale.messages}
+        >
+          <div className="app-main">
+
+            <Route path="/showcase/bbb" component={BBB} />
+          </div>
+        </IntlProvider>
+      </MuiThemeProvider>
     );
   }
 }
 
-function mapStateToProps(state: any): StateToPropsType {
+function mapStateToProps(state: StoreStateType): StateToPropsType {
+  console.log(`state:`);
+  console.log(state);
   return {
+    Authentication: state.Authentication,
+    Routing: state.Routing,
+    Settings: state.Settings
   };
 }
-
-type ThisStateType = {
-  email: string,
-  password: string
-};
 
 function mapDispatchToProps(dispatch: Dispatch<any>): DispatchToPropsType {
   return {
@@ -38,7 +50,14 @@ function mapDispatchToProps(dispatch: Dispatch<any>): DispatchToPropsType {
   };
 }
 
-type StateToPropsType = {};
+type ThisPropsType = StateToPropsType & DispatchToPropsType & OwnProps;
+
+type ThisStateType = {
+  email: string,
+  password: string
+};
+
+type StateToPropsType = StoreStateType;
 
 type DispatchToPropsType = {
   actions: {
@@ -46,7 +65,5 @@ type DispatchToPropsType = {
 };
 
 type OwnProps = RouteComponentProps<any>;
-
-type ThisPropsType = StateToPropsType & DispatchToPropsType & OwnProps;
 
 export default withRouter(connect<StateToPropsType, DispatchToPropsType, OwnProps>(mapStateToProps, mapDispatchToProps)(ShowCase));
