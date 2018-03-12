@@ -14,9 +14,10 @@ import BBB from 'bbb';
 
 class ShowCase extends React.Component<ThisPropsType, ThisStateType> {
   render() {
-    // const { match } = this.props;
+    const { match } = this.props;
     const currentAppLocale = AppLocale[this.props.Settings.Locale];
-
+    console.log(`match:`);
+    console.log(match);
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(DefaultTheme)}>
         <IntlProvider
@@ -25,7 +26,7 @@ class ShowCase extends React.Component<ThisPropsType, ThisStateType> {
         >
           <div className="app-main">
 
-            <Route path="/showcase/bbb" component={BBB} />
+            <Route path={`${match.url}/bbb`} component={BBB} />
           </div>
         </IntlProvider>
       </MuiThemeProvider>
