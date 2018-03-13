@@ -1,12 +1,13 @@
 import SettingsStateType from 'Types/StateTypes/SettingsStateType';
 import ISettingsAction from 'Interfaces/ActionInterfaces/ISettingsAction';
 import * as SettingsActionTypes from 'Types/ActionTypes/SettingsActionTypes';
-import * as Colors from 'material-ui/styles/colors';
+// import * as Colors from 'material-ui/styles/colors';
+// import amber from 'material-ui/color/amber';
 
 const InitState: SettingsStateType = {
   NavCollapsed: false,
   Locale: 'en',
-  ThemeColor: Colors.amber100,
+  ThemeColor: 'grey',
   IsSideBarCollapsed: false
 };
 

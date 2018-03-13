@@ -1,25 +1,48 @@
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import baseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import * as Colors from 'material-ui/styles/colors';
-import { fade } from 'material-ui/utils/colorManipulator';
+import grey from 'material-ui/colors/grey';
 
-const getTheme = () => {
-  let overwrites = {
-    'palette': {
-      'primary1Color': Colors.grey800,
-      'textColor': fade(Colors.lightWhite, 0.54),
-      'secondaryTextColor': Colors.white,
-      'alternateTextColor': fade(Colors.darkBlack, 0.87),
-      'canvasColor': Colors.grey900,
-      'borderColor': fade(Colors.lightWhite, 0.54),
-      'disabledColor': Colors.grey700,
-      'primary2Color': Colors.grey800,
-      'accent1Color': Colors.grey700,
-      'accent2Color': Colors.grey600,
-      'accent3Color': Colors.grey700
+export default {
+  palette: {
+    type: 'dark',
+    types: {
+      dark: {
+        background: {
+          paper: '#2d353c',
+          default: '#2d353c',
+          appBar: '#2d353c',
+          contentFrame: '#2d353c',
+          chip: '#2d353c',
+          avatar: '#2d353c'
+        }
+      }
+    },
+    primary: {
+      light: grey[100],
+      main: grey[300],
+      dark: grey[500],
+    },
+    secondary: {
+      light: grey[200],
+      main: grey[500],
+      dark: grey[700],
+    },
+    background: {
+      paper: '#2d353c',
+      default: '#2d353c',
+      appBar: '#2d353c',
+      contentFrame: '#2d353c',
+      chip: '#2d353c',
+      avatar: '#2d353c'
     }
-  };
-  return getMuiTheme(baseTheme, overwrites);
-};
+  },
+  status: {
+    danger: 'orange',
+  },
 
-export default getTheme();
+  typography: {
+    button: {
+      fontWeight: 400,
+      textAlign:
+        'capitalize'
+    },
+  },
+};

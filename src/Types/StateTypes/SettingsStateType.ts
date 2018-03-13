@@ -2,7 +2,8 @@ export type SettingsStateType = {
   NavCollapsed: boolean,
   Locale: string,
   ThemeColor: string,
-  IsSideBarCollapsed: boolean
+  IsSideBarCollapsed: boolean,
+  IsDrawerCollapsed: boolean
 };
 
 export default SettingsStateType;

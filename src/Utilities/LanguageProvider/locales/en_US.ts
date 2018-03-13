@@ -1,4 +1,5 @@
 const EN_US = {
+  'sidebar.CustomerManagement': 'Custmer Management',
   'sidebar.dashboard': 'Dashboard',
   'sidebar.dashboard.default': 'Default',
   'sidebar.dashboard.ecommerce': 'eCommerce',

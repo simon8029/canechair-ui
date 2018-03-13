@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "material-ui": "^0.20.0",
+    "material-ui": "v1.0.0-beta.37",
+    "material-ui-icons": "^1.0.0-beta.17",
+    "material-ui-pickers": "^1.0.0-beta.13.1",
     "react": "^16.2.0",
     "react-big-calendar": "^0.18.0",
     "react-dom": "^16.2.0",
@@ -14,7 +16,7 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.6",
     "react-scripts-ts": "2.13.0",
-    "reactstrap": "^4.8.0",
+    "reactstrap": "next",
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0"
   },
@@ -26,7 +28,7 @@
   },
   "devDependencies": {
     "@types/jest": "^22.2.0",
-    "@types/material-ui": "^0.21.1",
+    "@types/material-ui": "0.21.1",
     "@types/node": "^9.4.7",
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.4",
@@ -35,7 +37,7 @@
     "@types/react-router": "^4.0.22",
     "@types/react-router-dom": "^4.2.4",
     "@types/react-router-redux": "^5.0.12",
-    "@types/reactstrap": "^5.0.20",
+    "@types/reactstrap": "next",
     "@types/redux-devtools-extension": "^2.13.2",
     "@types/redux-thunk": "^2.1.0",
     "typescript": "^2.7.2"
