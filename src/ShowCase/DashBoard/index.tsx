@@ -1,19 +1,14 @@
 import * as React from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import DefaultDashboard from 'ShowCase/DashBoard/Default/index';
 
-class Default extends React.Component {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      anchorEl: undefined,
-      menuState: false,
-    };
-  }
+const Dashboard = ({ match }: any) => (
+  <div className="app-wrapper">
+    <Switch>
+      <Redirect exact from={`${match.url}/`} to={`${match.url}/default`} />
+      <Route path={`${match.url}/default`} component={DefaultDashboard} />
+    </Switch>
+  </div>
+);
 
-  render() {
-    return (
-      <div>DashBoard</div>
-    );
-  }
-}
-
-export default Default;
+export default Dashboard;

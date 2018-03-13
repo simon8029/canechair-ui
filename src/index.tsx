@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 // import PrivateRoute from 'Parts/Authentication/PrivateRoute';
 import { ConnectedRouter } from 'react-router-redux';
 import Store, { history } from 'Store/Store';
@@ -17,6 +17,7 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       {/* <PrivateRoute Path="/" Component={App} IsAuthenticated={false} /> */}
       <Switch>
+        <Redirect exact from="/" to="/ShowCase" />
         <PrivateRoute path="/ShowCase" component={ShowCase} />
         <Route path="/SignIn" component={SignIn} />
         <Route path="" component={FourOhFour} />
