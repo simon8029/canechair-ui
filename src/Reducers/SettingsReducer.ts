@@ -8,7 +8,8 @@ const InitState: SettingsStateType = {
   NavCollapsed: false,
   Locale: 'en',
   ThemeColor: 'grey',
-  IsSideBarCollapsed: false
+  IsSideBarCollapsed: false,
+  IsDrawerCollapsed: false
 };
 
 export function SettingsReducer(state: SettingsStateType = InitState, SettingsAction: ISettingsAction): SettingsStateType {
