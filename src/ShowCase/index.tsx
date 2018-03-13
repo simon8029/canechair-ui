@@ -12,8 +12,7 @@ import { StoreStateType } from 'Types/StateTypes/StoreStateType';
 import DashBoard from 'ShowCase/DashBoard/index';
 import BBB from 'bbb';
 import Sidebar from 'ShowCase/SideBar/index';
-// import { CCHeader } from 'Parts/Header';
-const CCHeader = require('Parts/Header/index');
+import { CCHeader } from 'Parts/Header';
 class ShowCase extends React.Component<ThisPropsType, ThisStateType> {
   render() {
     const { match } = this.props;
