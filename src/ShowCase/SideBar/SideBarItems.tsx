@@ -59,7 +59,7 @@ export class SideBarItems extends React.Component {
 
         <li className="menu">
           <Button href="javascript:void(0)">
-            <i className="zmdi zmdi-view-dashboard zmdi-hc-fw" />
+            <i className="fa fa-tachometer" />
             <span className="nav-text">
               <FormattedMessage id="sidebar.dashboard" />
             </span>

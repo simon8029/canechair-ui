@@ -35,14 +35,14 @@ export class CCHeader extends React.Component<ThisPropsType, ThisStateType> {
     const drawerStyle = !this.props.Settings.IsDrawerCollapsed ? 'd-block d-xl-none' : 'd-block';
 
     return (
-      <AppBar className="app-main-header">
-        <Toolbar className="app-toolbar" >
-          <IconButton className={`jr-menu-icon ${drawerStyle}`} aria-label="Menu">
+      <AppBar className="ccp-app-main-header">
+        <Toolbar className="ccp-app-header-toolbar" >
+          <IconButton className={`${drawerStyle}`} aria-label="Menu">
             <span className="menu-icon" />
           </IconButton>
 
           <Link className="app-logo" to="/">
-            <img src="assets/images/logo.png" alt="Jambo" title="Jambo" />
+            <img src="assets/images/logo.png" alt="CRMCore" title="CRMCore" />
           </Link>
 
           <SearchBox styleName="d-none d-sm-block" placeholder=""

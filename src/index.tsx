@@ -10,7 +10,7 @@ import ShowCase from 'ShowCase/index';
 import { PrivateRoute } from 'Parts/Authentication/PrivateRoute';
 import registerServiceWorker from './registerServiceWorker';
 import SignIn from 'Parts/Authentication/SignIn';
-import './index.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 ReactDOM.render(
   <Provider store={Store}>

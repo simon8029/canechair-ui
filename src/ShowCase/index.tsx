@@ -27,8 +27,8 @@ class ShowCase extends React.Component<ThisPropsType, ThisStateType> {
       >
         <div className="app-main">
           <Sidebar />
-          <div className="ccp-main-container">
-            <div className="ccp-header">
+          <div className="main-container">
+            <div className="app-header">
               <CCHeader
                 Authentication={this.props.Authentication}
                 Routing={this.props.Routing}
