@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Menu, { MenuItem } from 'material-ui/Menu';
-// import IntlMessages from 'util/IntlMessages';
+import * as IntlMessages from 'Utilities/IntlMessage';
 
 class CardMenu extends React.Component {
 

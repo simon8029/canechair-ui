@@ -11,18 +11,24 @@ import { PrivateRoute } from 'Parts/Authentication/PrivateRoute';
 import registerServiceWorker from './registerServiceWorker';
 import SignIn from 'Parts/Authentication/SignIn';
 import 'font-awesome/css/font-awesome.min.css';
+import CssBaseline from 'material-ui/CssBaseline';
+import 'Styles/app.css';
+import 'typeface-roboto';
 
 ReactDOM.render(
-  <Provider store={Store}>
-    <ConnectedRouter history={history}>
-      <Switch>
-        <Redirect exact from="/" to="/ShowCase" />
-        <PrivateRoute path="/ShowCase" component={ShowCase} />
-        <Route path="/SignIn" component={SignIn} />
-        <Route path="" component={FourOhFour} />
-      </Switch>
-    </ConnectedRouter >
-  </Provider>,
+  <div>
+    <CssBaseline />
+    <Provider store={Store}>
+      <ConnectedRouter history={history}>
+        <Switch>
+          <Redirect exact from="/" to="/ShowCase" />
+          <PrivateRoute path="/ShowCase" component={ShowCase} />
+          <Route path="/SignIn" component={SignIn} />
+          <Route path="" component={FourOhFour} />
+        </Switch>
+      </ConnectedRouter >
+    </Provider>
+  </div>,
   document.getElementById('root') as HTMLElement
 );
 registerServiceWorker();

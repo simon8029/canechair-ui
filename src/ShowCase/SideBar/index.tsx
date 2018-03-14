@@ -6,7 +6,7 @@ import Drawer from 'material-ui/Drawer';
 import StoreStateType from 'Types/StateTypes/StoreStateType';
 // import { Config } from 'constants/ThemeColors';
 import SideBarItems from './SideBarItems';
-// import UserInfo from 'components/UserInfo';
+import UserInfo from 'Parts/UserInfo';
 // import { COLLAPSED_DRAWER, FIXED_DRAWER } from 'constants/ActionTypes';
 // import { updateWindowWidth } from 'actions/Setting';
 
@@ -31,7 +31,7 @@ class SideBar extends React.PureComponent<ThisPropsType, ThisStateType> {
         <Drawer className="app-sidebar-content"
           open={type.includes('temporary') ? this.props.Settings.IsSideBarCollapsed : true}
         >
-          {/* <UserInfo /> */}
+          <UserInfo />
           <SideBarItems />
         </Drawer>
       </div>
