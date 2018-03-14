@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom';
 import Button from 'material-ui/Button';
 import { FormattedMessage } from 'react-intl';
 
-export class SidenavContent extends React.Component {
+export class SideBarItems extends React.Component {
+  nav: HTMLUListElement | null;
   componentDidMount() {
     // const { history }: any = this.props;
     //   const $nav = $(this.nav);
@@ -51,7 +52,7 @@ export class SidenavContent extends React.Component {
   render() {
     return (
       <ul className="nav-menu" ref={(c) => {
-        // this.nav = c;
+        this.nav = c;
       }}>
 
         <li className="nav-header"> CRM Core</li>
@@ -65,7 +66,7 @@ export class SidenavContent extends React.Component {
           </Button>
           <ul className="sub-menu">
             <li>
-              <NavLink className="prepend-icon" to="/app/dashboard/default">
+              <NavLink className="prepend-icon" to="/Dashboard/Default">
                 <span className="nav-text"><FormattedMessage id="sidebar.dashboard.default" /></span>
               </NavLink>
             </li>
@@ -92,4 +93,4 @@ export class SidenavContent extends React.Component {
   }
 }
 
-export default SidenavContent;
+export default SideBarItems;

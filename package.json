@@ -3,12 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start-js": "react-scripts-ts start",
-    "start": "npm-run-all -p watch-css start-js",
-    "build-js": "react-scripts-ts build",
-    "build": "npm-run-all build-css build-js",
-    "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
+    "build-css": "node-sass-chokidar src/Styles/app.scss -o src/Styles",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
   },
@@ -45,7 +42,6 @@
     "@types/reactstrap": "next",
     "@types/redux-devtools-extension": "^2.13.2",
     "@types/redux-thunk": "^2.1.0",
-    "npm-run-all": "^4.1.2",
     "typescript": "^2.7.2"
   }
 }

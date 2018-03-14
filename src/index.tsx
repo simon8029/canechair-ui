@@ -15,7 +15,6 @@ import './index.css';
 ReactDOM.render(
   <Provider store={Store}>
     <ConnectedRouter history={history}>
-      {/* <PrivateRoute Path="/" Component={App} IsAuthenticated={false} /> */}
       <Switch>
         <Redirect exact from="/" to="/ShowCase" />
         <PrivateRoute path="/ShowCase" component={ShowCase} />
