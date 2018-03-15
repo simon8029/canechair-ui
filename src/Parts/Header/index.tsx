@@ -7,22 +7,8 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
-import StoreStateType from 'Types/StateTypes/StoreStateType';
-// import { withStyles } from 'material-ui';
+// import StoreStateType from 'Types/StateTypes/StoreStateType';
 // import SearchBox from 'Parts/SearchBox';
-
-// const styles = {
-//   root: {
-//     flexGrow: 1,
-//   },
-//   flex: {
-//     flex: 1,
-//   },
-//   menuButton: {
-//     marginLeft: -12,
-//     marginRight: 20,
-//   },
-// };
 
 export class CCHeader extends React.Component<ThisPropsType, ThisStateType> {
   constructor(props: ThisPropsType) {
@@ -39,58 +25,25 @@ export class CCHeader extends React.Component<ThisPropsType, ThisStateType> {
 
   render() {
     return (
-      <AppBar className="app-main-header">
-        <Toolbar className="app-header-toolbar" >
-          <IconButton className="marginLeft: -12,    marginRight: 20," color="inherit" aria-label="Menu">
+      <AppBar
+        position="sticky"
+        className="ccp-app-header"
+      >
+        <Toolbar >
+          <IconButton color="inherit" aria-label="Menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="title" color="inherit" className="float-right">
-            Title
+          <Typography variant="title" color="inherit" >
+            CRM Core
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
-      </AppBar>
+      </ AppBar>
     );
-  }
-
-  componentWillMount() {
-    //
-  }
-
-  componentDidMount() {
-    //
-  }
-
-  componentWillReceiveProps(nextProps: StateToPropsType) {
-    //
-  }
-
-  componentDidUpdate() {
-    //
-  }
-
-  onAppNotificationSelect = () => {
-    //
-  }
-  onMailNotificationSelect = () => {
-    //
-  }
-  onLangSwitcherSelect = (event: any) => {
-    //
-  }
-  onSearchBoxSelect = () => {
-    //
-  }
-  handleRequestClose = () => {
-    //
-  }
-
-  updateSearchText = (event: any) => {
-    //
   }
 }
 
-function mapStateToProps(state: StoreStateType): StateToPropsType {
+function mapStateToProps(state: StateToPropsType): StateToPropsType {
   return {
   };
 }
@@ -110,6 +63,7 @@ type ThisStateType = {
 };
 
 type StateToPropsType = {
+
 };
 
 type DispatchToPropsType = {};
@@ -117,7 +71,7 @@ type DispatchToPropsType = {};
 type ThisPropsType = StateToPropsType & DispatchToPropsType;
 
 export default connect<StateToPropsType, DispatchToPropsType>(mapStateToProps, mapDispatchToProps)(CCHeader);
-// export default compose(
-  // withStyles(styles),
-  // connect<StateToPropsType, DispatchToPropsType>(mapStateToProps, mapDispatchToProps)
+          // export default compose(
+          //   withStyles(styles),
+//   connect<StateToPropsType, DispatchToPropsType>(mapStateToProps, mapDispatchToProps)
 // )(CCHeader);

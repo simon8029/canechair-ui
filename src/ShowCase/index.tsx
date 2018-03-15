@@ -14,6 +14,9 @@ import { StoreStateType } from 'Types/StateTypes/StoreStateType';
 // import Sidebar from 'ShowCase/SideBar/index';
 import { CCHeader } from 'Parts/Header';
 import Button from 'material-ui/Button';
+import Drawer from 'material-ui/Drawer';
+import Divider from 'material-ui/Divider';
+import Typography from 'material-ui/Typography';
 
 class ShowCase extends React.Component<ThisPropsType, ThisStateType> {
   render() {
@@ -23,6 +26,20 @@ class ShowCase extends React.Component<ThisPropsType, ThisStateType> {
     return (
       <MuiThemeProvider theme={createMuiTheme()}>
         <CCHeader />
+        cccc
+        <Drawer
+          variant="permanent"
+          classes={{ paper: 'ccp-sidebar-drawer-paper' }}
+          anchor="left"
+        >
+          <Typography variant="title" color="inherit" >
+            CRM Core
+          </Typography>
+          <Divider />
+          <Typography variant="title" color="inherit" >
+            CRM Core
+          </Typography>
+        </Drawer>
         {/* <IntlProvider
           locale={currentAppLocale.locale}
           messages={currentAppLocale.messages}
