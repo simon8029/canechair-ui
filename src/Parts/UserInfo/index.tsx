@@ -1,46 +1,52 @@
-
 import * as React from 'react';
-import Avatar from 'material-ui/Avatar';
 import { connect } from 'react-redux';
-// import Menu, { MenuItem } from 'material-ui/Menu';
-// import { userSignOut } from 'actions/Auth';
-// import IntlMessages from 'Utilities/IntlMessage';
+import { Dispatch } from 'redux';
+import { withStyles, WithStyles } from 'material-ui/styles';
+import Avatar from 'material-ui/Avatar';
 
-class UserInfo extends React.Component {
+const decorate = withStyles(() => ({
+  root: {
+  },
+}));
 
-  state = {
-    anchorEl: null,
-    open: false,
-  };
+export const CCUserInfo = decorate<ThisPropsType>(
+  class UserInfo extends React.Component<ThisPropsType & WithStyles<'root'>, ThisStateType> {
+    constructor(props: ThisPropsType) {
+      super(props as any);
+      this.state = {
+      };
+    }
 
-  handleClick = (event: any) => {
-    this.setState({ open: true, anchorEl: event.currentTarget });
-  }
-
-  handleRequestClose = () => {
-    this.setState({ open: false });
-  }
-
-  render() {
-    return (
-      <div className="user-profile d-flex flex-row align-items-center">
-        <Avatar
-          alt="..."
-          src="http://via.placeholder.com/150x150"
-          className="user-avatar "
-        />
-        <div className="user-detail">
-          <h4 className="user-name" onClick={this.handleClick}>CRM Core <i
-            className="zmdi zmdi-caret-down zmdi-hc-fw align-middle" />
-          </h4>
+    render() {
+      return (
+        <div>
+          <Avatar
+          />
         </div>
-      </div>
-    );
+      );
+    }
   }
+);
+
+function mapStateToProps(state: StateToPropsType): StateToPropsType {
+  return {
+  };
 }
 
-const mapStateToProps = ({ settings }: any) => {
-  // const { locale } = settings;
-  // return { locale };
+function mapDispatchToProps(dispatch: Dispatch<any>): DispatchToPropsType {
+  return {
+  };
+}
+
+type ThisStateType = {
 };
-export default connect(mapStateToProps, {})(UserInfo);
+
+type StateToPropsType = {
+};
+
+type DispatchToPropsType = {
+};
+
+type ThisPropsType = StateToPropsType & DispatchToPropsType;
+
+export default connect<StateToPropsType, DispatchToPropsType>(mapStateToProps, mapDispatchToProps)(CCUserInfo);

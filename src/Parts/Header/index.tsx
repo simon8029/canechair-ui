@@ -13,12 +13,20 @@ import * as StylesVariable from 'Styles/_variables';
 // import SearchBox from 'Parts/SearchBox';
 
 const decorate = withStyles(() => ({
+  AppBar: {
+    width: window.innerWidth - StylesVariable.AppDrawerWidth
+  },
+  AppBar2: {
+    marginLeft: StylesVariable.AppDrawerWidth,
+  },
   root: {
+    marginLeft: 100,
     width: window.innerWidth - StylesVariable.AppDrawerWidth
   },
 }));
-export const DecoratedCCHeader = decorate<ThisPropsType>(
-  class CCHeader extends React.Component<ThisPropsType & WithStyles<'root'>, ThisStateType> {
+
+export const CCHeader = decorate<ThisPropsType>(
+  class Header extends React.Component<ThisPropsType & WithStyles<'AppBar' | 'AppBar2' | 'root'>, ThisStateType> {
     constructor(props: ThisPropsType) {
       super(props as any);
       this.state = {
@@ -30,8 +38,9 @@ export const DecoratedCCHeader = decorate<ThisPropsType>(
         <div className="ccp-app-header-root">
           <AppBar
             position="sticky"
-            className="ccp-app-header"
-            classes={this.props.classes}
+            className={`${this.props.classes.AppBar} ${this.props.classes.AppBar2}`}
+          // className="ccp-app-header"
+          // classes={this.props.classes}
           >
             <Toolbar >
               <IconButton color="inherit" aria-label="Menu" className="ccp-app-header-menuButton">
@@ -70,7 +79,7 @@ type DispatchToPropsType = {};
 
 type ThisPropsType = StateToPropsType & DispatchToPropsType;
 
-export default connect<StateToPropsType, DispatchToPropsType>(mapStateToProps, mapDispatchToProps)(DecoratedCCHeader);
+export default connect<StateToPropsType, DispatchToPropsType>(mapStateToProps, mapDispatchToProps)(CCHeader);
 // export default compose(
 //   withStyles(styles),
 //   connect<StateToPropsType, DispatchToPropsType>(mapStateToProps, mapDispatchToProps)

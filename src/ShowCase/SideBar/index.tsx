@@ -2,11 +2,13 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import Drawer from 'material-ui/Drawer';
 import StoreStateType from 'Types/StateTypes/StoreStateType';
 // import { Config } from 'constants/ThemeColors';
-import SideBarItems from './SideBarItems';
+// import SideBarItems from './SideBarItems';
 import UserInfo from 'Parts/UserInfo';
+import Drawer from 'material-ui/Drawer';
+// import Divider from 'material-ui/Divider';
+// import Typography from 'material-ui/Typography';
 // import { COLLAPSED_DRAWER, FIXED_DRAWER } from 'constants/ActionTypes';
 // import { updateWindowWidth } from 'actions/Setting';
 
@@ -21,18 +23,32 @@ class SideBar extends React.PureComponent<ThisPropsType, ThisStateType> {
   render() {
     // const { navCollapsed, drawerType, width, locale }: any = this.props;
     // const drawerStyle = drawerType.includes(FIXED_DRAWER) ? 'd-xl-flex' : drawerType.includes(COLLAPSED_DRAWER) ? '' : 'd-flex';
-    let type = 'permanent';
+    // let type = 'permanent';
     // if (drawerType.includes(COLLAPSED_DRAWER) || (drawerType.includes(FIXED_DRAWER) && width < 1200)) {
     //   type = 'temporary';
     // }
 
     return (
       <div className={`app-sidebar d-none`}>
-        <Drawer className="app-sidebar-content"
+        {/* <Drawer className="app-sidebar-content"
           open={type.includes('temporary') ? this.props.Settings.IsSideBarCollapsed : true}
         >
           <UserInfo />
           <SideBarItems />
+        </Drawer> */}
+        <Drawer
+          variant="permanent"
+          classes={{ paper: 'ccp-sidebar-drawer-paper' }}
+          anchor="left"
+        >
+          <UserInfo />
+          {/* <Typography variant="title" color="inherit" >
+            CRM Core
+          </Typography>
+          <Divider />
+          <Typography variant="title" color="inherit" >
+            CRM Core
+          </Typography> */}
         </Drawer>
       </div>
     );
