@@ -12,7 +12,7 @@ import { StoreStateType } from 'Types/StateTypes/StoreStateType';
 // import DashBoard from 'ShowCase/DashBoard/index';
 // import BBB from 'bbb';
 // import Sidebar from 'ShowCase/SideBar/index';
-import { CCHeader } from 'Parts/Header';
+import { DecoratedCCHeader } from 'Parts/Header';
 import Button from 'material-ui/Button';
 import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
@@ -25,7 +25,7 @@ class ShowCase extends React.Component<ThisPropsType, ThisStateType> {
 
     return (
       <MuiThemeProvider theme={createMuiTheme()}>
-        <CCHeader />
+        <DecoratedCCHeader />
         cccc
         <Drawer
           variant="permanent"
