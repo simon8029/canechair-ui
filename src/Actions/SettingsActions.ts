@@ -10,5 +10,5 @@ export function SetThemeColor(color: string): ISettingsSetThemeColor {
 }
 
 export function ToggleSideBarCollapse(isSideBarCollapsed: boolean): ISettingsToggleSideBarCollapse {
-  return { type: SettingsActionTypes.Settings_ToggleSideBarCollapse, isSideBarCollapsed: isSideBarCollapsed };
+  return { type: SettingsActionTypes.Settings_ToggleSideBarCollapse, isSideBarCollapsed: !isSideBarCollapsed };
 }

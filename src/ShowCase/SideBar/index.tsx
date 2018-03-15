@@ -14,6 +14,7 @@ import DeleteIcon from 'material-ui-icons/Delete';
 import ReportIcon from 'material-ui-icons/Report';
 import * as StylesVariables from 'Styles/_variables';
 import UserInfo from 'Parts/UserInfo';
+import { StoreStateType } from 'Types/StateTypes/StoreStateType';
 
 const decorate = withStyles(() => ({
   SideBar: {
@@ -24,14 +25,34 @@ const decorate = withStyles(() => ({
   },
   Drawer: {
     width: StylesVariables.AppSideBarWidth
+  },
+  DrawerPaper: {
+    // position: 'relative',
+    width: StylesVariables.AppSideBarWidth,
+    // transition: theme.transitions.create('width', {
+    //   easing: theme.transitions.easing.sharp,
+    //   duration: theme.transitions.duration.enteringScreen,
+    // }),
+  },
+  DrawerPaperClose: {
+    // overflowX: 'hidden',
+    // transition: theme.transitions.create('width', {
+    //   easing: theme.transitions.easing.sharp,
+    //   duration: theme.transitions.duration.leavingScreen,
+    // }),
+    width: 50,
+    // [theme.breakpoints.up('sm')]: {
+    //   width: theme.spacing.unit * 9,
+    // },
   }
 }));
 
 export const CCSideBar = decorate<ThisPropsType>(
-  class SideBar extends React.Component<ThisPropsType & WithStyles<'SideBar' | 'Drawer' | 'ToolBar'>, ThisStateType> {
+  class SideBar extends React.Component<ThisPropsType & WithStyles<'SideBar' | 'Drawer' | 'DrawerPaper' | 'DrawerPaperClose' | 'ToolBar'>, ThisStateType> {
     constructor(props: ThisPropsType) {
       super(props as any);
       this.state = {
+        DrawOpen: true
       };
     }
 
@@ -41,7 +62,7 @@ export const CCSideBar = decorate<ThisPropsType>(
           <Drawer
             variant="permanent"
             classes={{
-              paper: this.props.classes.Drawer
+              paper: `${this.props.classes.Drawer} ${this.props.Settings.IsSideBarCollapsed && this.props.classes.DrawerPaperClose}`
             }}
           >
             <UserInfo />
@@ -52,7 +73,7 @@ export const CCSideBar = decorate<ThisPropsType>(
                 <ListItemIcon>
                   <InboxIcon />
                 </ListItemIcon>
-                <ListItemText primary="Inbox" />
+                <ListItemText primary="Customer Management" />
               </ListItem>
               <ListItem button>
                 <ListItemIcon>
@@ -99,8 +120,11 @@ export const CCSideBar = decorate<ThisPropsType>(
   }
 );
 
-function mapStateToProps(state: StateToPropsType): StateToPropsType {
+function mapStateToProps(state: StoreStateType): StateToPropsType {
   return {
+    Authentication: state.Authentication,
+    Routing: state.Routing,
+    Settings: state.Settings,
   };
 }
 
@@ -113,7 +137,7 @@ type ThisStateType = {
 };
 
 type StateToPropsType = {
-};
+} & StoreStateType;
 
 type DispatchToPropsType = {
 };

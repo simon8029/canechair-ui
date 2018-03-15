@@ -3,7 +3,6 @@ export type SettingsStateType = {
   Locale: string,
   ThemeColor: string,
   IsSideBarCollapsed: boolean,
-  IsDrawerCollapsed: boolean
 };
 
 export default SettingsStateType;

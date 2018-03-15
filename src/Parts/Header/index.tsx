@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+// import { withRouter, RouteComponentProps } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
@@ -9,7 +10,7 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import { withStyles, WithStyles } from 'material-ui/styles';
 import * as StylesVariable from 'Styles/_variables';
-// import StoreStateType from 'Types/StateTypes/StoreStateType';
+import StoreStateType from 'Types/StateTypes/StoreStateType';
 // import SearchBox from 'Parts/SearchBox';
 
 const decorate = withStyles(() => ({
@@ -17,15 +18,24 @@ const decorate = withStyles(() => ({
     width: window.innerWidth - StylesVariable.AppSideBarWidth,
     height: StylesVariable.AppHeaderHeight,
     marginLeft: StylesVariable.AppSideBarWidth
+  },
+  AppBar_SideBarCollapsed: {
+    width: window.innerWidth - StylesVariable.AppSideBarWidth_Collapsed,
+    height: StylesVariable.AppHeaderHeight,
+    marginLeft: StylesVariable.AppSideBarWidth
   }
 }));
 
-export const CCHeader = decorate<ThisPropsType>(
-  class Header extends React.Component<ThisPropsType & WithStyles<'AppBar'>, ThisStateType> {
+// No export here to avoid unconnected component export.
+const CCHeader = decorate<ThisPropsType>(
+  class Header extends React.Component<ThisPropsType & WithStyles<'AppBar' | 'AppBar_SideBarCollapsed'>, ThisStateType> {
     constructor(props: ThisPropsType) {
       super(props as any);
       this.state = {
+        isSideBarCollapsed: false
       };
+      console.log(`this.props:`);
+      console.log(this.props);
     }
 
     render() {
@@ -37,7 +47,7 @@ export const CCHeader = decorate<ThisPropsType>(
           >
             <Toolbar >
               <IconButton color="inherit" aria-label="Menu" className="ccp-app-header-menuButton">
-                <MenuIcon />
+                <MenuIcon onClick={this.props.toggleSideBar} />
               </IconButton>
               <Typography variant="title" color="inherit" className="ccp-app-header-title" >
                 CRM Core
@@ -48,11 +58,19 @@ export const CCHeader = decorate<ThisPropsType>(
         </div>
       );
     }
+    componentWillReceiveProps(nextProps: any) {
+      // this.setState({ isSideBarCollapsed: nextProps.isSideBarCollapsed });
+      console.log(`nextProps:`);
+      console.log(nextProps);
+    }
   }
 );
 
-function mapStateToProps(state: StateToPropsType): StateToPropsType {
+function mapStateToProps(state: StoreStateType, ownProps: OwnPropsType): StateToPropsType {
+  console.log(`state of header:`);
+  console.log(state);
   return {
+    isSideBarCollapsed: state.Settings.IsSideBarCollapsed
   };
 }
 
@@ -62,17 +80,23 @@ function mapDispatchToProps(dispatch: Dispatch<any>): DispatchToPropsType {
 }
 
 type ThisStateType = {
+  isSideBarCollapsed: boolean;
 };
 
 type StateToPropsType = {
-
+  // isSideBarCollapsed: boolean;
 };
 
-type DispatchToPropsType = {};
+type DispatchToPropsType = {
+};
 
-type ThisPropsType = StateToPropsType & DispatchToPropsType;
+type OwnPropsType = {
+  toggleSideBar: () => void;
+};
 
-export default connect<StateToPropsType, DispatchToPropsType>(mapStateToProps, mapDispatchToProps)(CCHeader);
+type ThisPropsType = StateToPropsType & DispatchToPropsType & OwnPropsType;
+
+export default connect<StateToPropsType, DispatchToPropsType, OwnPropsType>(mapStateToProps, mapDispatchToProps)(CCHeader);
 // export default compose(
 //   withStyles(styles),
 //   connect<StateToPropsType, DispatchToPropsType>(mapStateToProps, mapDispatchToProps)

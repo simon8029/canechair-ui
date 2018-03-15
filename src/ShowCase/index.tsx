@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 // import { IntlProvider } from 'react-intl';
 // import 'react-big-calendar/lib/less/styles.less';
@@ -9,23 +10,27 @@ import { connect, Dispatch } from 'react-redux';
 // import DefaultTheme from 'Themes/DefaultTheme';
 // import AppLocale from 'Utilities/LanguageProvider';
 import { StoreStateType } from 'Types/StateTypes/StoreStateType';
+import * as SettingsActions from 'Actions/SettingsActions';
 // import DashBoard from 'ShowCase/DashBoard/index';
 // import BBB from 'bbb';
 // import Sidebar from 'ShowCase/SideBar/index';
-import { CCHeader } from 'Parts/Header';
+import CCHeader from 'Parts/Header';
 import Button from 'material-ui/Button';
 import SideBar from 'ShowCase/SideBar';
 
 class ShowCase extends React.Component<ThisPropsType, ThisStateType> {
+  constructor(props: ThisPropsType) {
+    super(props as any);
+  }
+
   render() {
     // const { match } = this.props;
     // const currentAppLocale = AppLocale[this.props.Settings.Locale];
 
     return (
       <MuiThemeProvider theme={createMuiTheme()}>
-        <CCHeader />
-        cccc
-<SideBar />
+        <CCHeader toggleSideBar={this.toggleSideBar} />
+        <SideBar />
         {/* <IntlProvider
           locale={currentAppLocale.locale}
           messages={currentAppLocale.messages}
@@ -52,9 +57,14 @@ class ShowCase extends React.Component<ThisPropsType, ThisStateType> {
     );
   }
 
+  toggleSideBar = () => {
+    this.props.actions.ToggleSideBarCollapse(this.props.Settings.IsSideBarCollapsed);
+  }
 }
 
 function mapStateToProps(state: StoreStateType): StateToPropsType {
+  console.log(`state of showcase index:`);
+  console.log(state);
   return {
     Authentication: state.Authentication,
     Routing: state.Routing,
@@ -64,23 +74,19 @@ function mapStateToProps(state: StoreStateType): StateToPropsType {
 
 function mapDispatchToProps(dispatch: Dispatch<any>): DispatchToPropsType {
   return {
-    actions: {
-    }
+    actions: bindActionCreators(SettingsActions, dispatch)
   };
 }
 
 type ThisPropsType = StateToPropsType & DispatchToPropsType & OwnProps;
 
 type ThisStateType = {
-  email: string,
-  password: string
 };
 
 type StateToPropsType = StoreStateType;
 
 type DispatchToPropsType = {
-  actions: {
-  }
+  actions: typeof SettingsActions;
 };
 
 type OwnProps = RouteComponentProps<any>;

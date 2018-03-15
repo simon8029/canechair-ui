@@ -16,6 +16,7 @@ import 'Styles/app.css';
 import 'typeface-roboto';
 
 ReactDOM.render(
+
   <div>
     <CssBaseline />
     <Provider store={Store}>
