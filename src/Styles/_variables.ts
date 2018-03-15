@@ -1,1 +1,2 @@
-export const AppDrawerWidth = 240;
+export const AppHeaderHeight = 70;
+export const AppSideBarWidth = 240;

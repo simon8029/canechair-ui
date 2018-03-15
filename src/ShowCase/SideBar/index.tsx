@@ -1,92 +1,123 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import StoreStateType from 'Types/StateTypes/StoreStateType';
-// import { Config } from 'constants/ThemeColors';
-// import SideBarItems from './SideBarItems';
-import UserInfo from 'Parts/UserInfo';
+import { withStyles, WithStyles } from 'material-ui/styles';
+import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Drawer from 'material-ui/Drawer';
-// import Divider from 'material-ui/Divider';
-// import Typography from 'material-ui/Typography';
-// import { COLLAPSED_DRAWER, FIXED_DRAWER } from 'constants/ActionTypes';
-// import { updateWindowWidth } from 'actions/Setting';
+import Divider from 'material-ui/Divider';
+import InboxIcon from 'material-ui-icons/MoveToInbox';
+import DraftsIcon from 'material-ui-icons/Drafts';
+import StarIcon from 'material-ui-icons/Star';
+import SendIcon from 'material-ui-icons/Send';
+import MailIcon from 'material-ui-icons/Mail';
+import DeleteIcon from 'material-ui-icons/Delete';
+import ReportIcon from 'material-ui-icons/Report';
+import * as StylesVariables from 'Styles/_variables';
+import UserInfo from 'Parts/UserInfo';
 
-class SideBar extends React.PureComponent<ThisPropsType, ThisStateType> {
+const decorate = withStyles(() => ({
+  SideBar: {
+    width: StylesVariables.AppSideBarWidth
+  },
+  ToolBar: {
 
-  componentDidMount() {
-    // window.addEventListener('resize', () => {
-    //   this.props.updateWindowWidth($(window).width());
-    // });
+  },
+  Drawer: {
+    width: StylesVariables.AppSideBarWidth
   }
+}));
 
-  render() {
-    // const { navCollapsed, drawerType, width, locale }: any = this.props;
-    // const drawerStyle = drawerType.includes(FIXED_DRAWER) ? 'd-xl-flex' : drawerType.includes(COLLAPSED_DRAWER) ? '' : 'd-flex';
-    // let type = 'permanent';
-    // if (drawerType.includes(COLLAPSED_DRAWER) || (drawerType.includes(FIXED_DRAWER) && width < 1200)) {
-    //   type = 'temporary';
-    // }
+export const CCSideBar = decorate<ThisPropsType>(
+  class SideBar extends React.Component<ThisPropsType & WithStyles<'SideBar' | 'Drawer' | 'ToolBar'>, ThisStateType> {
+    constructor(props: ThisPropsType) {
+      super(props as any);
+      this.state = {
+      };
+    }
 
-    return (
-      <div className={`app-sidebar d-none`}>
-        {/* <Drawer className="app-sidebar-content"
-          open={type.includes('temporary') ? this.props.Settings.IsSideBarCollapsed : true}
-        >
-          <UserInfo />
-          <SideBarItems />
-        </Drawer> */}
-        <Drawer
-          variant="permanent"
-          classes={{ paper: 'ccp-sidebar-drawer-paper' }}
-          anchor="left"
-        >
-          <UserInfo />
-          {/* <Typography variant="title" color="inherit" >
-            CRM Core
-          </Typography>
-          <Divider />
-          <Typography variant="title" color="inherit" >
-            CRM Core
-          </Typography> */}
-        </Drawer>
-      </div>
-    );
+    render() {
+      return (
+        <div className={this.props.classes.SideBar}>
+          <Drawer
+            variant="permanent"
+            classes={{
+              paper: this.props.classes.Drawer
+            }}
+          >
+            <UserInfo />
+            <div className={this.props.classes.ToolBar} />
+            <Divider />
+            <List>
+              <ListItem button>
+                <ListItemIcon>
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Inbox" />
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <StarIcon />
+                </ListItemIcon>
+                <ListItemText primary="Starred" />
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <SendIcon />
+                </ListItemIcon>
+                <ListItemText primary="Send mail" />
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <DraftsIcon />
+                </ListItemIcon>
+                <ListItemText primary="Drafts" />
+              </ListItem></List>
+            <Divider />
+            <List>
+              <ListItem button>
+                <ListItemIcon>
+                  <MailIcon />
+                </ListItemIcon>
+                <ListItemText primary="All mail" />
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <DeleteIcon />
+                </ListItemIcon>
+                <ListItemText primary="Trash" />
+              </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <ReportIcon />
+                </ListItemIcon>
+                <ListItemText primary="Spam" />
+              </ListItem></List>
+          </Drawer>
+        </div>
+      );
+    }
   }
-}
+);
 
-function mapStateToProps(state: StoreStateType): StateToPropsType {
-  console.log(`state:`);
-  console.log(state);
+function mapStateToProps(state: StateToPropsType): StateToPropsType {
   return {
-    Authentication: state.Authentication,
-    Routing: state.Routing,
-    Settings: state.Settings
   };
 }
-
-// const mapStateToProps = ({ settings }: any) => {
-//   const { navCollapsed, drawerType, width, locale } = settings;
-//   return { navCollapsed, drawerType, width, locale };
-// };
 
 function mapDispatchToProps(dispatch: Dispatch<any>): DispatchToPropsType {
   return {
-    actions: {
-    }
   };
 }
-
-type ThisPropsType = StateToPropsType & DispatchToPropsType & OwnProps;
 
 type ThisStateType = {
 };
 
-type StateToPropsType = StoreStateType;
+type StateToPropsType = {
+};
 
 type DispatchToPropsType = {
 };
 
-type OwnProps = RouteComponentProps<any>;
+type ThisPropsType = StateToPropsType & DispatchToPropsType;
 
-export default withRouter(connect<StateToPropsType, DispatchToPropsType, OwnProps>(mapStateToProps, mapDispatchToProps)(SideBar));
+export default connect<StateToPropsType, DispatchToPropsType>(mapStateToProps, mapDispatchToProps)(CCSideBar);

@@ -14,19 +14,14 @@ import * as StylesVariable from 'Styles/_variables';
 
 const decorate = withStyles(() => ({
   AppBar: {
-    width: window.innerWidth - StylesVariable.AppDrawerWidth
-  },
-  AppBar2: {
-    marginLeft: StylesVariable.AppDrawerWidth,
-  },
-  root: {
-    marginLeft: 100,
-    width: window.innerWidth - StylesVariable.AppDrawerWidth
-  },
+    width: window.innerWidth - StylesVariable.AppSideBarWidth,
+    height: StylesVariable.AppHeaderHeight,
+    marginLeft: StylesVariable.AppSideBarWidth
+  }
 }));
 
 export const CCHeader = decorate<ThisPropsType>(
-  class Header extends React.Component<ThisPropsType & WithStyles<'AppBar' | 'AppBar2' | 'root'>, ThisStateType> {
+  class Header extends React.Component<ThisPropsType & WithStyles<'AppBar'>, ThisStateType> {
     constructor(props: ThisPropsType) {
       super(props as any);
       this.state = {
@@ -38,9 +33,7 @@ export const CCHeader = decorate<ThisPropsType>(
         <div className="ccp-app-header-root">
           <AppBar
             position="sticky"
-            className={`${this.props.classes.AppBar} ${this.props.classes.AppBar2}`}
-          // className="ccp-app-header"
-          // classes={this.props.classes}
+            className={this.props.classes.AppBar}
           >
             <Toolbar >
               <IconButton color="inherit" aria-label="Menu" className="ccp-app-header-menuButton">
