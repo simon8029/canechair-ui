@@ -16,6 +16,7 @@ import { withStyles, WithStyles, Theme, StyleRules } from 'material-ui/styles';
 import * as StylesVariable from 'Styles/_variables';
 import StoreStateType from 'Types/StateTypes/StoreStateType';
 import SideBarItems from 'ShowCase/SideBar/SideBarItems';
+import CCDashboard from 'ShowCase/DashBoard';
 
 const decorate = withStyles((theme: Theme) => {
   const styles: StyleRules = {
@@ -127,7 +128,7 @@ const CCShowCase = decorate<ThisPropsType>(
             </Drawer>
             <main className={this.props.classes.content}>
               <div className={this.props.classes.toolbar} />
-              <Typography noWrap>{'Dashboard Content.'}</Typography>
+              <CCDashboard />
             </main>
           </div>
         </MuiThemeProvider >
