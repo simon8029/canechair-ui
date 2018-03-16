@@ -91,13 +91,13 @@ export const CCTotalUsersCard = decorate<ThisPropsType>(
                       <MoreVertIcon />
                     </IconButton>
                   }
-                  title="Customer in Total"
+                  title="Customers in Total"
                   subheader={`[Amount]`}
                 />
                 <CardContent>
                   <Paper className={this.props.classes.paper_placeholder_totalCustomer}>
                     <Typography>
-                      [Placeholder for chart]
+                      [Chart]
                     </Typography>
                   </Paper>
                 </CardContent>
@@ -108,7 +108,7 @@ export const CCTotalUsersCard = decorate<ThisPropsType>(
                 </CardActions>
               </Card>
             </Grid>
-            <Grid item md={7} >
+            <Grid item xs={12} md={7} >
               <Grid container spacing={24} >
                 <Grid item xs={12} md={6}>
                   <Card className={this.props.classes.card_md}>
