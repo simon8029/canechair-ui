@@ -12,7 +12,7 @@ export interface ISettingsSetThemeColor {
 
 export interface ISettingsToggleSideBarCollapse {
   type: ActionTypes.Settings_ToggleSideBarCollapse;
-  isSideBarCollapsed: boolean;
+  isSideBarOpen: boolean;
 }
 
 export type ISettingsAction =

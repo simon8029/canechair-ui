@@ -62,7 +62,7 @@ export const CCSideBar = decorate<ThisPropsType>(
           <Drawer
             variant="permanent"
             classes={{
-              paper: `${this.props.classes.Drawer} ${this.props.Settings.IsSideBarCollapsed && this.props.classes.DrawerPaperClose}`
+              paper: `${this.props.classes.Drawer} ${this.props.Settings.IsSideBarOpen && this.props.classes.DrawerPaperClose}`
             }}
           >
             <UserInfo />

@@ -9,6 +9,6 @@ export function SetThemeColor(color: string): ISettingsSetThemeColor {
   return { type: SettingsActionTypes.Settings_SetThemeColor, ThemeColor: color };
 }
 
-export function ToggleSideBarCollapse(isSideBarCollapsed: boolean): ISettingsToggleSideBarCollapse {
-  return { type: SettingsActionTypes.Settings_ToggleSideBarCollapse, isSideBarCollapsed: !isSideBarCollapsed };
+export function ToggleSideBarCollapse(isSideBarOpen: boolean): ISettingsToggleSideBarCollapse {
+  return { type: SettingsActionTypes.Settings_ToggleSideBarCollapse, isSideBarOpen: !isSideBarOpen };
 }

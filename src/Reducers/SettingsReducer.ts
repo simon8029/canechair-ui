@@ -8,7 +8,7 @@ const InitState: SettingsStateType = {
   NavCollapsed: false,
   Locale: 'en',
   ThemeColor: 'grey',
-  IsSideBarCollapsed: false
+  IsSideBarOpen: false
 };
 
 export function SettingsReducer(state: SettingsStateType = InitState, SettingsAction: ISettingsAction): SettingsStateType {
@@ -20,7 +20,7 @@ export function SettingsReducer(state: SettingsStateType = InitState, SettingsAc
       return { ...state, ThemeColor: SettingsAction.ThemeColor };
 
     case SettingsActionTypes.Settings_ToggleSideBarCollapse:
-      return { ...state, IsSideBarCollapsed: SettingsAction.isSideBarCollapsed };
+      return { ...state, IsSideBarOpen: SettingsAction.isSideBarOpen };
 
     default:
       return state;

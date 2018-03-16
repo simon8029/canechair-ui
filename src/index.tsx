@@ -6,7 +6,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 import Store, { history } from 'Store/Store';
 import FourOhFour from 'Parts/Common/404';
-import ShowCase from 'ShowCase/index';
+import ShowCase from 'ShowCase/index_persistent';
 import { PrivateRoute } from 'Parts/Authentication/PrivateRoute';
 import registerServiceWorker from './registerServiceWorker';
 import SignIn from 'Parts/Authentication/SignIn';
