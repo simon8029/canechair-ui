@@ -115,7 +115,7 @@ export const CCTotalUsersCard = decorate<ThisPropsType>(
                     <CardHeader
                       avatar={
                         <Avatar aria-label="" className={this.props.classes.avatar_md}>
-                          MD
+                          Md
                   </Avatar>}
                       action={
                         <IconButton>

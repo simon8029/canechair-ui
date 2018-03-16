@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { Link } from 'react-router-dom';
 import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
@@ -28,6 +29,9 @@ const decorate = withStyles((theme: Theme) => {
       },
     },
     nestedItem: {
+      '&:focus': {
+        backgroundColor: theme.palette.primary.main
+      },
       paddingLeft: theme.spacing.unit * 4,
     },
   };
@@ -39,8 +43,11 @@ export const SideBarItems = decorate<ThisPropsType>(
     constructor(props: ThisPropsType) {
       super(props as any);
       this.state = {
+        IsItemGroupOpen_Dashboard: true,
         IsItemGroupOpen_CustomerManagement: false
       };
+      const dashboard = document.getElementById('dashboard');
+      dashboard!.focus();
     }
 
     render() {
@@ -48,13 +55,17 @@ export const SideBarItems = decorate<ThisPropsType>(
         <div className={this.props.classes.root}>
           <div>
             <List>
-              <ListItem button className={this.props.classes.listItem} onClick={this.onItemGroupClick.bind(this, 'customerManagement')}>
+              <ListItem id="dashboard" component={props => <Link to="/ShowCase" {...props} />} className={this.props.classes.listItem} onClick={this.onItemGroupClick.bind(this, 'dashboard')}>
+                <ListItemIcon><InboxIcon /></ListItemIcon>
+                <ListItemText primary="Dashboard" />
+              </ListItem>
+              <ListItem component={props => <Link to="/ShowCase" {...props} />} button className={this.props.classes.listItem} onClick={this.onItemGroupClick.bind(this, 'customerManagement')}>
                 <ListItemIcon><InboxIcon /></ListItemIcon>
                 <ListItemText primary="Customer Management" />
               </ListItem>
               <Collapse in={this.state.IsItemGroupOpen_CustomerManagement} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                  <ListItem button className={this.props.classes.nestedItem}>
+                  <ListItem component={props => <Link to="/ShowCase/AccountTypes" {...props} />} button className={this.props.classes.nestedItem}>
                     <ListItemIcon><InboxIcon /></ListItemIcon>
                     <ListItemText primary="Account Types" />
                   </ListItem>
@@ -95,6 +106,9 @@ export const SideBarItems = decorate<ThisPropsType>(
       this.cleanCollapseStatus();
 
       switch (moduleName) {
+        case 'dashboard':
+          this.setState({ IsItemGroupOpen_Dashboard: true });
+          break;
         case 'customerManagement':
           this.setState({ IsItemGroupOpen_CustomerManagement: true });
           break;
@@ -123,6 +137,7 @@ function mapDispatchToProps(dispatch: Dispatch<any>): DispatchToPropsType {
 }
 
 type ThisStateType = {
+  IsItemGroupOpen_Dashboard: boolean;
   IsItemGroupOpen_CustomerManagement: boolean;
 };
 
