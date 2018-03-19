@@ -7,18 +7,17 @@ import CCContainerHeader from 'Parts/CCContainerHeader';
 const decorate = withStyles((theme: Theme) => {
   const styles: StyleRules = {
     root: {
-      flexGrow: 1,
-      zIndex: 1,
-      overflow: 'hidden',
-      position: 'relative',
-      display: 'flex',
+      flexGrow: 1
     },
+    formAppBar: {
+
+    }
   };
   return styles;
 }, { withTheme: true });
 
 export const CCForm = decorate<ThisPropsType>(
-  class InnerClass extends React.Component<ThisPropsType & WithStyles<'root'>, ThisStateType> {
+  class InnerClass extends React.Component<ThisPropsType & WithStyles<'root' | 'formAppBar'>, ThisStateType> {
     constructor(props: ThisPropsType) {
       super(props as any);
       this.state = {
@@ -29,8 +28,9 @@ export const CCForm = decorate<ThisPropsType>(
       return (
         <div className={this.props.classes.root}>
           <CCContainerHeader
+            className={this.props.classes.formAppBar}
             title="Form"
-            subTitle="subTitlesubTitlesubTitlesubTitlesubTitlesubTitlesubTitlesubTitlesubTitlesubTitlesubTitlesubTitlesubTitlesubTitlesubTitlesubTitle"
+            subTitle="subTitle"
           />
           {/* <div className="animated slideInUpTiny animation-duration-3">
             <ContainerHeader title="Text Fields" match={match}/>

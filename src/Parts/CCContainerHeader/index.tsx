@@ -2,32 +2,22 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { withStyles, WithStyles, StyleRules, Theme } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
 import Grid from 'material-ui/Grid';
+import Typography from 'material-ui/Typography';
 
 const decorate = withStyles((theme: Theme) => {
   const styles: StyleRules = {
     root: {
-      flexGrow: 1,
-      zIndex: 1,
-      overflow: 'hidden',
-      position: 'relative',
-      display: 'flex',
-    },
-    wrapper: {
-      maxWidth: 400,
-    },
-    paper: {
-      margin: theme.spacing.unit,
-      padding: theme.spacing.unit * 2,
+      margin: theme.spacing.unit
     }
   };
   return styles;
 }, { withTheme: true });
 
 export const CCContainerHeader = decorate<ThisPropsType>(
-  class InnerClass extends React.Component<ThisPropsType & WithStyles<'root' | 'paper' | 'wrapper'>, ThisStateType> {
+  class InnerClass extends React.Component<ThisPropsType & WithStyles<'root'>, ThisStateType> {
     constructor(props: ThisPropsType) {
       super(props as any);
       this.state = {
@@ -37,20 +27,17 @@ export const CCContainerHeader = decorate<ThisPropsType>(
     render() {
       return (
         <div className={this.props.classes.root}>
-          <div className={this.props.classes.wrapper}>
-            <Paper className={this.props.classes.paper} >
-              <Grid container wrap="nowrap"  >
-                <Grid item xs={6}>
-                  <Typography variant="headline" component="h3">
+          <Grid container>
+            <Grid item xs>
+              <AppBar position="static" color="default" className={this.props.className}>
+                <Toolbar>
+                  <Typography variant="title" color="inherit">
                     {this.props.title}
                   </Typography>
-                  <Typography >
-                    {this.props.subTitle}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
-          </div>
+                </Toolbar>
+              </AppBar>
+            </Grid>
+          </Grid>
         </div>
       );
     }
@@ -60,7 +47,8 @@ export const CCContainerHeader = decorate<ThisPropsType>(
 function mapStateToProps(state: StateToPropsType, ownProps: OwnPropsType): StateToPropsType {
   return {
     title: ownProps.title,
-    subTitle: ownProps.subTitle
+    subTitle: ownProps.subTitle,
+    className: ownProps.className
   };
 }
 
@@ -73,6 +61,9 @@ type ThisStateType = {
 };
 
 type StateToPropsType = {
+  title: string;
+  subTitle?: string | undefined;
+  className?: string | undefined;
 };
 
 type DispatchToPropsType = {
@@ -80,7 +71,8 @@ type DispatchToPropsType = {
 
 type OwnPropsType = {
   title: string;
-  subTitle: string;
+  subTitle?: string | undefined;
+  className?: string | undefined;
 };
 
 type ThisPropsType = StateToPropsType & DispatchToPropsType & OwnPropsType;

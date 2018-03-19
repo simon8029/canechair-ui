@@ -14,7 +14,6 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
-import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
@@ -27,6 +26,7 @@ import AccountTypes from 'ShowCase/AccountTypes';
 import CCForm from 'ShowCase/CCForm';
 import CCDataTable from 'ShowCase/CCDataTable';
 import CCTimeLine from 'ShowCase/CCTimeLine';
+import Typography from 'material-ui/Typography';
 
 const decorate = withStyles((theme: Theme) => {
   const styles: StyleRules = {
@@ -84,7 +84,7 @@ const decorate = withStyles((theme: Theme) => {
     content: {
       flexGrow: 1,
       backgroundColor: theme.palette.background.default,
-      padding: theme.spacing.unit * 3,
+      padding: theme.spacing.unit,
     },
   };
   return styles;
