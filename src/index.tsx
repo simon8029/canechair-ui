@@ -12,7 +12,6 @@ import registerServiceWorker from './registerServiceWorker';
 import SignIn from 'Parts/Authentication/SignIn';
 import 'font-awesome/css/font-awesome.min.css';
 import CssBaseline from 'material-ui/CssBaseline';
-import 'Styles/app.css';
 import 'typeface-roboto';
 
 ReactDOM.render(

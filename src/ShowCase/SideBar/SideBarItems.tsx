@@ -10,9 +10,13 @@ import InboxIcon from 'material-ui-icons/MoveToInbox';
 import DraftsIcon from 'material-ui-icons/Drafts';
 import StarIcon from 'material-ui-icons/Star';
 import SendIcon from 'material-ui-icons/Send';
-import MailIcon from 'material-ui-icons/Mail';
-import DeleteIcon from 'material-ui-icons/Delete';
-import ReportIcon from 'material-ui-icons/Report';
+// import MailIcon from 'material-ui-icons/Mail';
+// import DeleteIcon from 'material-ui-icons/Delete';
+// import ReportIcon from 'material-ui-icons/Report';
+import DashboardIcon from 'material-ui-icons/Dashboard';
+import WebIcon from 'material-ui-icons/Web';
+import AssignmentIcon from 'material-ui-icons/Assignment';
+import TimelineIcon from 'material-ui-icons/Timeline';
 
 const decorate = withStyles((theme: Theme) => {
   const styles: StyleRules = {
@@ -43,11 +47,8 @@ export const SideBarItems = decorate<ThisPropsType>(
     constructor(props: ThisPropsType) {
       super(props as any);
       this.state = {
-        IsItemGroupOpen_Dashboard: true,
-        IsItemGroupOpen_CustomerManagement: false
+        IsItemGroupOpen_CustomerManagement: false,
       };
-      const dashboard = document.getElementById('dashboard');
-      dashboard!.focus();
     }
 
     render() {
@@ -56,12 +57,12 @@ export const SideBarItems = decorate<ThisPropsType>(
           <div>
             <List>
               <ListItem id="dashboard" component={props => <Link to="/ShowCase" {...props} />} className={this.props.classes.listItem} onClick={this.onItemGroupClick.bind(this, 'dashboard')}>
-                <ListItemIcon><InboxIcon /></ListItemIcon>
+                <ListItemIcon><DashboardIcon /></ListItemIcon>
                 <ListItemText primary="Dashboard" />
               </ListItem>
               <ListItem component={props => <Link to="/ShowCase" {...props} />} button className={this.props.classes.listItem} onClick={this.onItemGroupClick.bind(this, 'customerManagement')}>
                 <ListItemIcon><InboxIcon /></ListItemIcon>
-                <ListItemText primary="Customer Management" />
+                <ListItemText primary="Components" />
               </ListItem>
               <Collapse in={this.state.IsItemGroupOpen_CustomerManagement} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
@@ -85,17 +86,17 @@ export const SideBarItems = decorate<ThisPropsType>(
               </ListItem></List>
             <Divider />
             <List>
-              <ListItem button onClick={this.onItemGroupClick.bind(this, 'd')} className={this.props.classes.listItem}>
-                <ListItemIcon><MailIcon /></ListItemIcon>
-                <ListItemText primary="All mail" />
+              <ListItem button component={props => <Link to="/ShowCase/Form" {...props} />} className={this.props.classes.listItem} >
+                <ListItemIcon><WebIcon /></ListItemIcon>
+                <ListItemText primary="Forms" />
               </ListItem>
-              <ListItem button onClick={this.onItemGroupClick.bind(this, 'e')} className={this.props.classes.listItem}>
-                <ListItemIcon><DeleteIcon /></ListItemIcon>
-                <ListItemText primary="Trash" />
+              <ListItem button component={props => <Link to="/ShowCase/DataTable" {...props} />} className={this.props.classes.listItem}>
+                <ListItemIcon><AssignmentIcon /></ListItemIcon>
+                <ListItemText primary="DataTable" />
               </ListItem>
-              <ListItem button onClick={this.onItemGroupClick.bind(this, 'f')} className={this.props.classes.listItem}>
-                <ListItemIcon><ReportIcon /></ListItemIcon>
-                <ListItemText primary="Spam" />
+              <ListItem button component={props => <Link to="/ShowCase/TimeLine" {...props} />} className={this.props.classes.listItem}>
+                <ListItemIcon><TimelineIcon /></ListItemIcon>
+                <ListItemText primary="TimeLine" />
               </ListItem></List>
           </div>
         </div>
@@ -106,9 +107,6 @@ export const SideBarItems = decorate<ThisPropsType>(
       this.cleanCollapseStatus();
 
       switch (moduleName) {
-        case 'dashboard':
-          this.setState({ IsItemGroupOpen_Dashboard: true });
-          break;
         case 'customerManagement':
           this.setState({ IsItemGroupOpen_CustomerManagement: true });
           break;
@@ -137,7 +135,6 @@ function mapDispatchToProps(dispatch: Dispatch<any>): DispatchToPropsType {
 }
 
 type ThisStateType = {
-  IsItemGroupOpen_Dashboard: boolean;
   IsItemGroupOpen_CustomerManagement: boolean;
 };
 

@@ -100,8 +100,8 @@ const CCHeader = decorate<ThisPropsType>(
                 <MenuIcon />
               </IconButton>
               <Typography variant="title" color="inherit" className="ccp-app-header-title" >
-                CRM Core
-          </Typography>
+                {this.props.title}
+              </Typography>
               <Button color="inherit" >Login</Button>
             </Toolbar>
           </ AppBar>
@@ -116,6 +116,7 @@ const CCHeader = decorate<ThisPropsType>(
 
 function mapStateToProps(state: StoreStateType, ownProps: OwnPropsType): StateToPropsType {
   return {
+    title: ownProps.title,
     isSideBarOpen: state.Settings.IsSideBarOpen
   };
 }
@@ -137,6 +138,7 @@ type DispatchToPropsType = {
 };
 
 type OwnPropsType = {
+  title: string;
   toggleSideBar: () => void;
 };
 

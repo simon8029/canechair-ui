@@ -6,6 +6,8 @@ import { connect, Dispatch } from 'react-redux';
 // import * as DarkTheme from 'Themes/darkTheme';
 import * as SettingsActions from 'Actions/SettingsActions';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import * as StylesVariable from 'Styles/_variables';
+import { withStyles, WithStyles, Theme, StyleRules } from 'material-ui/styles';
 // import PrivateRoute from 'Parts/Authentication/PrivateRoute';
 // import { ConnectedRouter } from 'react-router-redux';
 import AppBar from 'material-ui/AppBar';
@@ -15,13 +17,16 @@ import Divider from 'material-ui/Divider';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
-import { withStyles, WithStyles, Theme, StyleRules } from 'material-ui/styles';
-import * as StylesVariable from 'Styles/_variables';
+import ChevronRightIcon from 'material-ui-icons/ChevronRight';
+import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import StoreStateType from 'Types/StateTypes/StoreStateType';
 import SideBarItems from 'ShowCase/SideBar/SideBarItems';
 import DefaultTheme from 'Themes/DefaultTheme';
 import CCDashboard from 'ShowCase/DashBoard';
 import AccountTypes from 'ShowCase/AccountTypes';
+import CCForm from 'ShowCase/CCForm';
+import CCDataTable from 'ShowCase/CCDataTable';
+import CCTimeLine from 'ShowCase/CCTimeLine';
 
 const decorate = withStyles((theme: Theme) => {
   const styles: StyleRules = {
@@ -124,8 +129,9 @@ const CCShowCase = decorate<ThisPropsType>(
               open={this.props.Settings.IsSideBarOpen}
             >
               <div className={this.props.classes.toolbar}>
-                <IconButton >
-                  {/* {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />} */}
+                <IconButton
+                  onClick={this.toggleSideBar}>
+                  {this.props.theme && this.props.theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                 </IconButton>
               </div>
               <Divider />
@@ -137,6 +143,9 @@ const CCShowCase = decorate<ThisPropsType>(
                 <Redirect exact from="/" to="/ShowCase" />
                 <Route exact path="/ShowCase" component={CCDashboard} />
                 <Route path="/ShowCase/AccountTypes" component={AccountTypes} />
+                <Route path="/ShowCase/Form" component={CCForm} />
+                <Route path="/ShowCase/DataTable" component={CCDataTable} />
+                <Route path="/ShowCase/TimeLine" component={CCTimeLine} />
               </Switch>
             </main>
           </div>
