@@ -1,10 +1,13 @@
 import * as React from 'react';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import { MuiThemeProvider } from 'material-ui/styles';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 // import * as DarkTheme from 'Themes/darkTheme';
 import * as SettingsActions from 'Actions/SettingsActions';
+import { Route, Switch, Redirect } from 'react-router-dom';
+// import PrivateRoute from 'Parts/Authentication/PrivateRoute';
+// import { ConnectedRouter } from 'react-router-redux';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Drawer from 'material-ui/Drawer';
@@ -16,6 +19,9 @@ import { withStyles, WithStyles, Theme, StyleRules } from 'material-ui/styles';
 import * as StylesVariable from 'Styles/_variables';
 import StoreStateType from 'Types/StateTypes/StoreStateType';
 import SideBarItems from 'ShowCase/SideBar/SideBarItems';
+import DefaultTheme from 'Themes/DefaultTheme';
+import CCDashboard from 'ShowCase/DashBoard';
+import AccountTypes from 'ShowCase/AccountTypes';
 
 const decorate = withStyles((theme: Theme) => {
   const styles: StyleRules = {
@@ -91,7 +97,7 @@ const CCShowCase = decorate<ThisPropsType>(
     }
     render() {
       return (
-        <MuiThemeProvider theme={createMuiTheme()}>
+        <MuiThemeProvider theme={DefaultTheme}>
           <div className={this.props.classes.root}>
             <AppBar
               position="absolute"
@@ -127,7 +133,11 @@ const CCShowCase = decorate<ThisPropsType>(
             </Drawer>
             <main className={this.props.classes.content}>
               <div className={this.props.classes.toolbar} />
-              <Typography noWrap>{'Dashboard Content.'}</Typography>
+              <Switch>
+                <Redirect exact from="/" to="/ShowCase" />
+                <Route exact path="/ShowCase" component={CCDashboard} />
+                <Route path="/ShowCase/AccountTypes" component={AccountTypes} />
+              </Switch>
             </main>
           </div>
         </MuiThemeProvider >
