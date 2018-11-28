@@ -1,50 +1,19 @@
 {
-  "name": "canechair.parts",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build",
-    "build-css": "node-sass-chokidar src/Styles/app.scss -o src/Styles",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
-  },
-  "dependencies": {
-    "classnames": "^2.2.5",
-    "font-awesome": "^4.7.0",
-    "jquery": "^3.3.1",
-    "material-design-icons": "^3.0.1",
-    "material-ui": "v1.0.0-beta.37",
-    "material-ui-icons": "^1.0.0-beta.36",
-    "material-ui-pickers": "^1.0.0-beta.13.1",
-    "node-sass-chokidar": "^1.1.0",
-    "react": "^16.2.0",
-    "react-big-calendar": "^0.18.0",
-    "react-dom": "^16.2.0",
-    "react-intl": "^2.4.0",
-    "react-notifications": "^1.4.3",
-    "react-redux": "^5.0.7",
-    "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2",
-    "react-router-redux": "^5.0.0-alpha.6",
-    "react-scripts-ts": "2.13.0",
-    "redux-devtools-extension": "^2.13.2",
-    "redux-thunk": "^2.2.0",
-    "typeface-roboto": "^0.0.54"
-  },
-  "devDependencies": {
-    "@types/classnames": "^2.2.3",
-    "@types/jest": "^22.2.0",
-    "@types/node": "^9.4.7",
-    "@types/react": "^16.0.40",
-    "@types/react-dom": "^16.0.4",
-    "@types/react-intl": "^2.3.5",
-    "@types/react-redux": "^5.0.15",
-    "@types/react-router": "^4.0.22",
-    "@types/react-router-dom": "^4.2.4",
-    "@types/react-router-redux": "^5.0.12",
-    "@types/redux-devtools-extension": "^2.13.2",
-    "@types/redux-thunk": "^2.1.0",
-    "typescript": "^2.7.2"
-  }
+	"name": "canechair-ui",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/simon8029/canechair-ui.git"
+	},
+	"keywords": [],
+	"author": "Simon X. L.",
+	"bugs": {
+		"url": "https://github.com/simon8029/canechair-ui/issues"
+	},
+	"homepage": "https://github.com/simon8029/canechair-ui#readme"
 }
